@@ -60,17 +60,19 @@ namespace Campo_minato3
 
             PrendiDifficolta();
 
-            creaCelle(lughezzaLato);
+            creaCelle();
+
+            riordinaGrandezze();
         }
 
-        public void creaCelle(int lato)
+        public void creaCelle()
         {
-
+            // pulisce il datagridview
             dtg_campo.Columns.Clear();
             dtg_campo.Rows.Clear();
 
             // creazione colonne
-            for (int i = 0; i < lato; i++)
+            for (int i = 0; i < lughezzaLato; i++)
             {
                 DataGridViewButtonColumn btnColumn = new DataGridViewButtonColumn();
                 btnColumn.Width = 25;
@@ -82,13 +84,13 @@ namespace Campo_minato3
             }
 
             // creazione righe
-            for (int i = 0; i < lato; i++)
+            for (int i = 0; i < lughezzaLato; i++)
             {
                 dtg_campo.Rows.Add();
                 dtg_campo.Rows[i].Height = 25;
 
                 // da ad ogni cella il colore e il tag 0 che indica l'acqua
-                for (int j = 0; j < lato; j++)
+                for (int j = 0; j < lughezzaLato; j++)
                 {
                     dtg_campo.Rows[i].Cells[j].Style.BackColor = Color.LightBlue;
                     dtg_campo.Rows[i].Cells[j].Tag = 0;
@@ -110,14 +112,17 @@ namespace Campo_minato3
 
             // tgliere il bordo tra le celle
             dtg_campo.CellBorderStyle = DataGridViewCellBorderStyle.None; 
+        }
 
+        public void riordinaGrandezze()
+        {
             // ridimensiona la grandezza del datagridview in base alla grandezza delle celle
-            dtg_campo.Height = (int)25 * lato + 2;
-            dtg_campo.Width = (int)25 * lato + 2;
-
+            dtg_campo.Height = (int)25 * lughezzaLato + 2;
+            dtg_campo.Width = (int)25 * lughezzaLato + 2;
+            
             // ridimensiona la grandezza della finestra in base alla grandezza del datagridview
             this.ClientSize = new Size(dtg_campo.Width + 20, dtg_campo.Height + 20); // +20 per il bordo della finestra
-
+            
             // centra il datagridview nella finestra
             dtg_campo.Location = new Point((this.ClientSize.Width - dtg_campo.Width) / 2, (this.ClientSize.Height - dtg_campo.Height) / 2);
         }
@@ -133,7 +138,6 @@ namespace Campo_minato3
             }
 
             campo = new int[lughezzaLato, lughezzaLato]; // crea il campo di gioco
-
         }
 
 
