@@ -16,6 +16,8 @@ namespace Campo_minato3
         {
             InitializeComponent();
 
+            int come = 98;
+
             creaCelle(10);
         }
 
