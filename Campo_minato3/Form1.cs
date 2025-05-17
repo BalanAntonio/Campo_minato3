@@ -63,6 +63,8 @@ namespace Campo_minato3
             creaCelle();
 
             riordinaGrandezze();
+
+            posizionaMine();
         }
 
         public void creaCelle()
@@ -138,6 +140,34 @@ namespace Campo_minato3
             }
 
             campo = new int[lughezzaLato, lughezzaLato]; // crea il campo di gioco
+        }
+
+        public void posizionaMine()
+        {
+            Random random = new Random(Environment.TickCount);
+            int minePos = 0;
+            while (minePos < Nmine)
+            {
+                int x = random.Next(0, lughezzaLato);
+                int y = random.Next(0, lughezzaLato);
+                if (campo[y, x] != -2) // se la cella non è già occupata da una mina
+                {
+                    campo[y, x] = -2; // posiziona la mina
+
+                    // incrementa il numero di mine adiacenti
+                    campo[y, x + 1]++; 
+                    campo[y, x - 1]++;
+                    campo[y + 1, x]++;
+                    campo[y - 1, x]++;
+                    campo[y + 1, x + 1]++;
+                    campo[y - 1, x - 1]++;
+                    campo[y + 1, x - 1]++;
+                    campo[y - 1, x + 1]++;
+
+
+                    minePos++;
+                }
+            }
         }
 
 
