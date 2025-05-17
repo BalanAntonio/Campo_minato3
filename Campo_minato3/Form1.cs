@@ -13,6 +13,9 @@ namespace Campo_minato3
 {
     public partial class Form1 : Form
     {
+
+        int[,] Area;
+
         //  0   ->  Cella vuota non scoperta
         //  9   ->  Cella vuota scoperta
         //  10  ->  Cella con mina
@@ -39,8 +42,10 @@ namespace Campo_minato3
                 // Codice di game over
             }
         }
+        public void AggiornaDatagrid()
+        {
 
-
+        }
         int lughezzaLato;
         int Nmine;
 
@@ -114,7 +119,7 @@ namespace Campo_minato3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void dtg_campo_CellContentClick(object sender, DataGridViewCellEventArgs e)
