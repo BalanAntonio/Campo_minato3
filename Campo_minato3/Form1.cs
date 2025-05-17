@@ -28,7 +28,7 @@ namespace Campo_minato3
 
         // io farei:
         //  -1   ->  Cella vuota scoperta
-        //  -2   ->  Cella vuota scoperta
+        //  -2   ->  Cella con mina nascosta
 
         static void ScopriCasella(int x, int y, ref int[,] Area)
         {
@@ -156,9 +156,6 @@ namespace Campo_minato3
 
                     // incrementa il numero di mine adiacenti
                     incrementaNumeroMineVicine(x, y);
-
-
-
                     minePos++;
                 }
             }
