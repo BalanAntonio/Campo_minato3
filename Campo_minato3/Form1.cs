@@ -152,7 +152,9 @@ namespace Campo_minato3
                 int y = random.Next(0, lughezzaLato);
                 if (campo[x, y] != -2) // se la cella non è già occupata da una mina
                 {
-                    campo[x, x] = -2; // posiziona la mina
+                    campo[x, y] = -2; // posiziona la mina
+
+                    dtg_campo.Rows[y].Cells[x].Value = campo[x, y]; //per capire se funziona
 
                     // incrementa il numero di mine adiacenti
                     incrementaNumeroMineVicine(x, y);
@@ -175,14 +177,17 @@ namespace Campo_minato3
 
                         if (Posx >= 0 && Posx < lughezzaLato && Posy >= 0 && Posy < lughezzaLato)
                         {
-                            campo[Posx, Posy]++;
+                            if (campo[Posx, Posy] != -2)// se la cella non è una mina
+                            {
+                                campo[Posx, Posy]++;
+                            } 
+
+                            dtg_campo.Rows[Posy].Cells[Posx].Value = campo[Posx, Posy]; //per capire se funziona
                         }
                     }
                 }
             }
         }
-
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
