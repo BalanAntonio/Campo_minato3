@@ -12,6 +12,35 @@ namespace Campo_minato3
 {
     public partial class Form1 : Form
     {
+        //  0   ->  Cella vuota non scoperta
+        //  9   ->  Cella vuota scoperta
+        //  10  ->  Cella con mina
+        //  -10 ->  Cella con mina nascosta
+        //  Altri numeri positivi    ->  Numero bombe adiacenti scoperti
+        //  Altri numeri negativi   ->  Numero bombe adiacenti non scoperti
+
+        static void ScopriCasella(int x, int y, ref int[,] Area)
+        {
+            if (Area[y, x] == 0)
+            {
+                Area[y, x] = 1; // Rende cella vuota scoperta e non cliccabile
+                ScopriCasella(x, y + 1, ref Area);
+                ScopriCasella(x, y - 1, ref Area);
+                ScopriCasella(x + 1, y, ref Area);
+                ScopriCasella(x - 1, y, ref Area);
+            }
+            else if (Area[y, x] <= -1 && Area[y, x] >= -8)
+            {
+                Area[y, x] *= -1;   // Rende il numero visibile
+            }
+            else if (Area[y, x] == 10)
+            {
+                // Codice di game over
+            }
+        }
+
+
+
         public Form1()
         {
             InitializeComponent();
@@ -57,6 +86,8 @@ namespace Campo_minato3
             dtg_campo.AllowUserToResizeColumns = false;
             dtg_campo.AllowUserToResizeRows = false;
         }
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
