@@ -23,6 +23,8 @@ namespace Campo_minato3
             cmb_difficolta.Items.Add("Facile");
             cmb_difficolta.Items.Add("Medio");
             cmb_difficolta.Items.Add("Difficile");
+
+            cmb_difficolta.SelectedIndex = 0;
         }
 
         private void btn_inserisci_Click(object sender, EventArgs e)
@@ -31,18 +33,18 @@ namespace Campo_minato3
 
             if (difficolta == "facile")
             {
-                lunghezza_lato = 9;
-                Nmine = 10;
+                lunghezza_latoIn = 9;
+                NmineIn = 10;
             }
             else if (difficolta == "medio")
             {
-                lunghezza_lato = 16;
-                Nmine = 40;
+                lunghezza_latoIn = 16;
+                NmineIn = 40;
             }
             else if (difficolta == "difficile")
             {
-                lunghezza_lato = 30;
-                Nmine = 100;
+                lunghezza_latoIn = 30;
+                NmineIn = 100;
             }
 
             DialogResult = DialogResult.OK;

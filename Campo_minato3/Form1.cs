@@ -60,7 +60,7 @@ namespace Campo_minato3
             for (int i = 0; i < lato; i++)
             {
                 DataGridViewButtonColumn btnColumn = new DataGridViewButtonColumn();
-                btnColumn.Width = 35;
+                btnColumn.Width = 25;
                 btnColumn.FlatStyle = FlatStyle.Flat; // per un bottone più personalizzabile
 
                 btnColumn.DefaultCellStyle.Font = new Font("Arial", 14, FontStyle.Bold);
@@ -72,7 +72,7 @@ namespace Campo_minato3
             for (int i = 0; i < lato; i++)
             {
                 dtg_campo.Rows.Add();
-                dtg_campo.Rows[i].Height = 35;
+                dtg_campo.Rows[i].Height = 25;
 
                 // da ad ogni cella il colore e il tag 0 che indica l'acqua
                 for (int j = 0; j < lato; j++)

@@ -59,10 +59,6 @@
             // cmb_difficolta
             // 
             this.cmb_difficolta.FormattingEnabled = true;
-            this.cmb_difficolta.Items.AddRange(new object[] {
-            "Facile",
-            "Medio",
-            "Difficile"});
             this.cmb_difficolta.Location = new System.Drawing.Point(80, 132);
             this.cmb_difficolta.Name = "cmb_difficolta";
             this.cmb_difficolta.Size = new System.Drawing.Size(121, 21);
