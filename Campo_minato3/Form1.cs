@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -54,7 +55,13 @@ namespace Campo_minato3
 
         public void creaCelle(int lato)
         {
-            
+            dtg_campo.Height = (int)25.8 * lato;
+            dtg_campo.Width = (int)25.8 * lato;
+
+
+
+            dtg_campo.Columns.Clear();
+            dtg_campo.Rows.Clear();
 
             // creazione colonne
             for (int i = 0; i < lato; i++)

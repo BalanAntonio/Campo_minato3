@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.dtg_campo = new System.Windows.Forms.DataGridView();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_campo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -37,6 +38,7 @@
             this.dtg_campo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtg_campo.Location = new System.Drawing.Point(42, 12);
             this.dtg_campo.Name = "dtg_campo";
+            this.dtg_campo.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dtg_campo.Size = new System.Drawing.Size(687, 403);
             this.dtg_campo.TabIndex = 0;
             this.dtg_campo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_campo_CellContentClick);
@@ -58,6 +60,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dtg_campo;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
