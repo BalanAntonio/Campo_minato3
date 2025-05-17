@@ -14,7 +14,10 @@ namespace Campo_minato3
     public partial class Form1 : Form
     {
 
-        int[,] Area;
+        int lughezzaLato;
+        int Nmine;
+
+        int[,] campo;
 
         //  0   ->  Cella vuota non scoperta
         //  9   ->  Cella vuota scoperta
@@ -22,6 +25,10 @@ namespace Campo_minato3
         //  -10 ->  Cella con mina nascosta
         //  Altri numeri positivi    ->  Numero bombe adiacenti scoperti
         //  Altri numeri negativi   ->  Numero bombe adiacenti non scoperti
+
+        // io farei:
+        //  -1   ->  Cella vuota scoperta
+        //  -2   ->  Cella vuota scoperta
 
         static void ScopriCasella(int x, int y, ref int[,] Area)
         {
@@ -46,8 +53,6 @@ namespace Campo_minato3
         {
 
         }
-        int lughezzaLato;
-        int Nmine;
 
         public Form1()
         {
@@ -60,10 +65,6 @@ namespace Campo_minato3
 
         public void creaCelle(int lato)
         {
-            dtg_campo.Height = (int)25.8 * lato;
-            dtg_campo.Width = (int)25.8 * lato;
-
-
 
             dtg_campo.Columns.Clear();
             dtg_campo.Rows.Clear();
@@ -107,13 +108,18 @@ namespace Campo_minato3
             dtg_campo.AllowUserToDeleteRows = false; // non permette di eliminare righe
             dtg_campo.AllowUserToOrderColumns = false; // non permette di ordinare le colonne
 
+            // tgliere il bordo tra le celle
+            dtg_campo.CellBorderStyle = DataGridViewCellBorderStyle.None; 
 
             // ridimensiona la grandezza del datagridview in base alla grandezza delle celle
-            int spessoreBordo = dtg_campo.CellBorderStyle != DataGridViewCellBorderStyle.None ? 1 : 0;
+            dtg_campo.Height = (int)25 * lato + 2;
+            dtg_campo.Width = (int)25 * lato + 2;
 
-            dtg_campo.Height = (int)25 * lato + spessoreBordo * (lato - 1);
-            dtg_campo.Width = (int)25 * lato + spessoreBordo * (lato - 1);
+            // ridimensiona la grandezza della finestra in base alla grandezza del datagridview
+            this.ClientSize = new Size(dtg_campo.Width + 20, dtg_campo.Height + 20); // +20 per il bordo della finestra
 
+            // centra il datagridview nella finestra
+            dtg_campo.Location = new Point((this.ClientSize.Width - dtg_campo.Width) / 2, (this.ClientSize.Height - dtg_campo.Height) / 2);
         }
 
         public void PrendiDifficolta()
@@ -122,9 +128,11 @@ namespace Campo_minato3
 
             if(finestra.ShowDialog() == DialogResult.OK)
             {
-                lughezzaLato = finestra.lunghezza_latoIn;
-                Nmine = finestra.NmineIn;
+                lughezzaLato = finestra.lunghezza_latoIn; // prendi il numero di celle per lato
+                Nmine = finestra.NmineIn; // prendi il numero di mine
             }
+
+            campo = new int[lughezzaLato, lughezzaLato]; // crea il campo di gioco
 
         }
 
