@@ -41,19 +41,20 @@ namespace Campo_minato3
                 // Codice di game over
             }
         }
-
         public void AggiornaDatagrid()
         {
-            
+
         }
+        int lughezzaLato;
+        int Nmine;
 
         public Form1()
         {
             InitializeComponent();
 
-            int come = 98;
+            PrendiDifficolta();
 
-            creaCelle(30);
+            creaCelle(lughezzaLato);
         }
 
         public void creaCelle(int lato)
@@ -93,6 +94,18 @@ namespace Campo_minato3
             dtg_campo.AllowUserToAddRows = false;
             dtg_campo.AllowUserToResizeColumns = false;
             dtg_campo.AllowUserToResizeRows = false;
+        }
+
+        public void PrendiDifficolta()
+        {
+            finestra_iniziale finestra = new finestra_iniziale();
+
+            if(finestra.ShowDialog() == DialogResult.OK)
+            {
+                lughezzaLato = finestra.lunghezza_latoIn;
+                Nmine = finestra.NmineIn;
+            }
+
         }
 
 
