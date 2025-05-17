@@ -40,14 +40,16 @@ namespace Campo_minato3
         }
 
 
+        int lughezzaLato;
+        int Nmine;
 
         public Form1()
         {
             InitializeComponent();
 
-            int come = 98;
+            PrendiDifficolta();
 
-            creaCelle(10);
+            creaCelle(lughezzaLato);
         }
 
         public void creaCelle(int lato)
@@ -87,6 +89,18 @@ namespace Campo_minato3
             dtg_campo.AllowUserToAddRows = false;
             dtg_campo.AllowUserToResizeColumns = false;
             dtg_campo.AllowUserToResizeRows = false;
+        }
+
+        public void PrendiDifficolta()
+        {
+            finestra_iniziale finestra = new finestra_iniziale();
+
+            if(finestra.ShowDialog() == DialogResult.OK)
+            {
+                lughezzaLato = finestra.lunghezza_latoIn;
+                Nmine = finestra.NmineIn;
+            }
+
         }
 
 
