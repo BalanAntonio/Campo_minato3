@@ -12,6 +12,9 @@ namespace Campo_minato3
 {
     public partial class Form1 : Form
     {
+
+        int[,] Area;
+
         //  0   ->  Cella vuota non scoperta
         //  9   ->  Cella vuota scoperta
         //  10  ->  Cella con mina
@@ -39,7 +42,10 @@ namespace Campo_minato3
             }
         }
 
-
+        public void AggiornaDatagrid()
+        {
+            
+        }
 
         public Form1()
         {
@@ -47,7 +53,7 @@ namespace Campo_minato3
 
             int come = 98;
 
-            creaCelle(10);
+            creaCelle(30);
         }
 
         public void creaCelle(int lato)
@@ -58,7 +64,7 @@ namespace Campo_minato3
             for (int i = 0; i < lato; i++)
             {
                 DataGridViewButtonColumn btnColumn = new DataGridViewButtonColumn();
-                btnColumn.Width = 35;
+                btnColumn.Width = 25;
                 btnColumn.FlatStyle = FlatStyle.Flat; // per un bottone più personalizzabile
 
                 btnColumn.DefaultCellStyle.Font = new Font("Arial", 14, FontStyle.Bold);
@@ -70,7 +76,7 @@ namespace Campo_minato3
             for (int i = 0; i < lato; i++)
             {
                 dtg_campo.Rows.Add();
-                dtg_campo.Rows[i].Height = 35;
+                dtg_campo.Rows[i].Height = 25;
 
                 // da ad ogni cella il colore e il tag 0 che indica l'acqua
                 for (int j = 0; j < lato; j++)
@@ -93,7 +99,7 @@ namespace Campo_minato3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void dtg_campo_CellContentClick(object sender, DataGridViewCellEventArgs e)
