@@ -49,10 +49,6 @@ namespace Campo_minato3
                 // Codice di game over
             }
         }
-        public void AggiornaDatagrid()
-        {
-
-        }
 
         public Form1()
         {
@@ -154,7 +150,6 @@ namespace Campo_minato3
                 {
                     campo[x, y] = -2; // posiziona la mina
 
-                    dtg_campo.Rows[y].Cells[x].Value = campo[x, y]; //per capire se funziona
 
                     // incrementa il numero di mine adiacenti
                     incrementaNumeroMineVicine(x, y);
@@ -175,28 +170,84 @@ namespace Campo_minato3
                         int Posx = xIn + x;
                         int Posy = yIn + y;
 
-                        if (Posx >= 0 && Posx < lughezzaLato && Posy >= 0 && Posy < lughezzaLato)
+                        if (controlloBordi(Posx, Posy))
                         {
                             if (campo[Posx, Posy] != -2)// se la cella non è una mina
                             {
                                 campo[Posx, Posy]++;
                             } 
 
-                            dtg_campo.Rows[Posy].Cells[Posx].Value = campo[Posx, Posy]; //per capire se funziona
                         }
                     }
                 }
             }
         }
 
+        private void dtg_campo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // prende le coordinate della cella cliccata
+            int riga = e.RowIndex;
+            int colonna = e.ColumnIndex;
+
+            if (campo[colonna, riga] != -1){
+
+                if (campo[colonna, riga] > 0)
+                {
+                    dtg_campo.Rows[riga].Cells[colonna].Value = campo[colonna, riga]; // fa vedere all'utente il valore
+                }
+                else if (campo[colonna, riga] == -2)
+                {
+                    // partita persa
+                }
+                else
+                {
+                    // implementare funzione per scoprire tutte le celle fino a quando non trova quelle con i numeri, flood fill
+                    IndicaCelleVuote(colonna, riga);
+                }
+
+            }
+        }
+
+        public void IndicaCelleVuote(int xIn, int yIn)
+        {
+            if(controlloBordi(xIn, yIn))
+            {
+                if (campo[xIn, yIn] == 0)
+                {
+
+                    dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.White; // cambia il colore della cella in bianco
+                    campo[xIn, yIn] = -1; // rende la cella scoperta
+
+                    IndicaCelleVuote(xIn + 1, yIn); // cella a destra
+                    IndicaCelleVuote(xIn - 1, yIn); // cella a sinistra
+                    IndicaCelleVuote(xIn, yIn + 1); // cella sotto
+                    IndicaCelleVuote(xIn, yIn - 1); // cella sopra
+                }
+                else if (campo[xIn, yIn] > 0)
+                {
+
+                    dtg_campo.Rows[yIn].Cells[xIn].Value = campo[xIn, yIn];
+                    dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.White; // cambia il colore della cella in bianco
+                    campo[xIn, yIn] *= -1; // rende la cella scoperta e non cliccabile
+                }
+            }
+        }
+
+        public bool controlloBordi(int xIn, int yIn)
+        {
+            if (xIn < 0 || xIn >= lughezzaLato || yIn < 0 || yIn >= lughezzaLato)
+            {
+                return false; // esci dalla funzione se le coordinate sono fuori dai bordi
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             
-        }
-
-        private void dtg_campo_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
