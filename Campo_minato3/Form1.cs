@@ -150,22 +150,37 @@ namespace Campo_minato3
             {
                 int x = random.Next(0, lughezzaLato);
                 int y = random.Next(0, lughezzaLato);
-                if (campo[y, x] != -2) // se la cella non è già occupata da una mina
+                if (campo[x, y] != -2) // se la cella non è già occupata da una mina
                 {
-                    campo[y, x] = -2; // posiziona la mina
+                    campo[x, x] = -2; // posiziona la mina
 
                     // incrementa il numero di mine adiacenti
-                    campo[y, x + 1]++; 
-                    campo[y, x - 1]++;
-                    campo[y + 1, x]++;
-                    campo[y - 1, x]++;
-                    campo[y + 1, x + 1]++;
-                    campo[y - 1, x - 1]++;
-                    campo[y + 1, x - 1]++;
-                    campo[y - 1, x + 1]++;
+                    incrementaNumeroMineVicine(x, y);
+
 
 
                     minePos++;
+                }
+            }
+        }
+
+        public void incrementaNumeroMineVicine(int xIn, int yIn)
+        {
+
+            for (int y = -1; y <= 1; y++)
+            {
+                for (int x = -1; x <= 1; x++)
+                {
+                    if (x != 0 || y != 0)
+                    {
+                        int Posx = xIn + x;
+                        int Posy = yIn + y;
+
+                        if (Posx >= 0 && Posx < lughezzaLato && Posy >= 0 && Posy < lughezzaLato)
+                        {
+                            campo[Posx, Posy]++;
+                        }
+                    }
                 }
             }
         }
