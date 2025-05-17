@@ -98,9 +98,22 @@ namespace Campo_minato3
             dtg_campo.RowHeadersVisible = false;
 
             // non permette all'utente di uscire dagli schemi
-            dtg_campo.AllowUserToAddRows = false;
-            dtg_campo.AllowUserToResizeColumns = false;
-            dtg_campo.AllowUserToResizeRows = false;
+            dtg_campo.AllowUserToAddRows = false; // non permette di aggiungere righe
+            dtg_campo.AllowUserToAddRows = false; // non permette di aggiungere righe
+            dtg_campo.AllowUserToResizeColumns = false; // non permette di ridimensionare le righe e le colonne
+            dtg_campo.AllowUserToResizeRows = false; // non permette di ridimensionare le righe e le colonne    
+            dtg_campo.MultiSelect = false; // non permette di selezionare più celle contemporaneamente
+            dtg_campo.ReadOnly = true; // rende le celle non modificabili
+            dtg_campo.AllowUserToDeleteRows = false; // non permette di eliminare righe
+            dtg_campo.AllowUserToOrderColumns = false; // non permette di ordinare le colonne
+
+
+            // ridimensiona la grandezza del datagridview in base alla grandezza delle celle
+            int spessoreBordo = dtg_campo.CellBorderStyle != DataGridViewCellBorderStyle.None ? 1 : 0;
+
+            dtg_campo.Height = (int)25 * lato + spessoreBordo * (lato - 1);
+            dtg_campo.Width = (int)25 * lato + spessoreBordo * (lato - 1);
+
         }
 
         public void PrendiDifficolta()
