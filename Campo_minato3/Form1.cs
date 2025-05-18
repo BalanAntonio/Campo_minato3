@@ -185,15 +185,17 @@ namespace Campo_minato3
 
         private void dtg_campo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //if(e)
             // prende le coordinate della cella cliccata
             int riga = e.RowIndex;
             int colonna = e.ColumnIndex;
-
+            dtg_campo.ClearSelection();
             if (campo[colonna, riga] != -1){
 
                 if (campo[colonna, riga] > 0)
                 {
                     dtg_campo.Rows[riga].Cells[colonna].Value = campo[colonna, riga]; // fa vedere all'utente il valore
+                    dtg_campo.Rows[riga].Cells[colonna].Style.BackColor = Color.White;
                 }
                 else if (campo[colonna, riga] == -2)
                 {
@@ -222,13 +224,14 @@ namespace Campo_minato3
                     IndicaCelleVuote(xIn - 1, yIn); // cella a sinistra
                     IndicaCelleVuote(xIn, yIn + 1); // cella sotto
                     IndicaCelleVuote(xIn, yIn - 1); // cella sopra
+
                 }
                 else if (campo[xIn, yIn] > 0)
                 {
-
-                    dtg_campo.Rows[yIn].Cells[xIn].Value = campo[xIn, yIn];
                     dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.White; // cambia il colore della cella in bianco
-                    campo[xIn, yIn] *= -1; // rende la cella scoperta e non cliccabile
+                    dtg_campo.Rows[yIn].Cells[xIn].Value = campo[xIn, yIn];
+                    
+                    campo[xIn, yIn] -= 10; // rende la cella scoperta e non cliccabile
                 }
             }
         }
@@ -249,5 +252,7 @@ namespace Campo_minato3
         {
             
         }
+
+        
     }
 }
