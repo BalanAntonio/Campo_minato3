@@ -19,14 +19,13 @@ namespace Campo_minato3
 
         int[,] campo;
 
-        //  0   ->  Cella vuota non scoperta
-        //  9   ->  Cella vuota scoperta
-        //  10  ->  Cella con mina
-        //  -10 ->  Cella con mina nascosta
-        //  Altri numeri positivi    ->  Numero bombe adiacenti scoperti
-        //  Altri numeri negativi   ->  Numero bombe adiacenti non scoperti
+        int BandiereGiuste = 0;
+        int BandiereSbagliate = 0;
 
-        // io farei:
+        //  0   ->  Cella vuota non scoperta
+        //  1 a 8 ->  Cella con numero di mine adiacenti coperto
+        //  10    ->  Cella vuota scoperta
+        //  11 a 18  ->  Cella con numero di mine adiacenti NON coperto
         //  -1   ->  Cella vuota scoperta
         //  -2   ->  Cella con mina nascosta
 
@@ -92,6 +91,7 @@ namespace Campo_minato3
                 {
                     dtg_campo.Rows[i].Cells[j].Style.BackColor = Color.LightBlue;
                     dtg_campo.Rows[i].Cells[j].Tag = 0;
+                    dtg_campo.Rows[i].Cells[j].Value = " ";
                 }
             }
 
@@ -185,6 +185,7 @@ namespace Campo_minato3
 
         private void dtg_campo_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            /*
             //if(e)
             // prende le coordinate della cella cliccata
             int riga = e.RowIndex;
@@ -207,7 +208,7 @@ namespace Campo_minato3
                     IndicaCelleVuote(colonna, riga);
                 }
 
-            }
+            }*/
         }
 
         public void IndicaCelleVuote(int xIn, int yIn)
@@ -218,7 +219,7 @@ namespace Campo_minato3
                 {
 
                     dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.White; // cambia il colore della cella in bianco
-                    campo[xIn, yIn] = -1; // rende la cella scoperta
+                    campo[xIn, yIn] = 10; // rende la cella scoperta
 
                     IndicaCelleVuote(xIn + 1, yIn); // cella a destra
                     IndicaCelleVuote(xIn - 1, yIn); // cella a sinistra
@@ -226,12 +227,12 @@ namespace Campo_minato3
                     IndicaCelleVuote(xIn, yIn - 1); // cella sopra
 
                 }
-                else if (campo[xIn, yIn] > 0)
+                else if (campo[xIn, yIn] > 0 && campo[xIn, yIn]<10)
                 {
                     dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.White; // cambia il colore della cella in bianco
                     dtg_campo.Rows[yIn].Cells[xIn].Value = campo[xIn, yIn];
                     
-                    campo[xIn, yIn] -= 10; // rende la cella scoperta e non cliccabile
+                    campo[xIn, yIn] += 10; // rende la cella scoperta e non cliccabile
                 }
             }
         }
@@ -253,6 +254,69 @@ namespace Campo_minato3
             
         }
 
-        
+        private void dtg_campo_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int riga = e.RowIndex;
+            int colonna = e.ColumnIndex;
+
+            if (e.Button == MouseButtons.Right)// CLICK DESTRO PER BANDIERE
+            {
+                if (campo[colonna, riga] == -2) // se c'e la mina dove hai fatto click destro
+                {
+                    if (dtg_campo.Rows[riga].Cells[colonna].Value == " ") // messa bandiera su mina nascosta
+                    {
+                        dtg_campo.Rows[riga].Cells[colonna].Value = "🚩";
+                        BandiereGiuste++;
+                    }
+                    else if (dtg_campo.Rows[riga].Cells[colonna].Value == "🚩") // tolto bandiera su mina nascosta
+                    {
+                        dtg_campo.Rows[riga].Cells[colonna].Value = " ";
+                        BandiereGiuste--;
+                    }
+                }
+                else if (campo[colonna, riga] >= 0 && campo[colonna, riga] <= 8)
+                {
+                    if (dtg_campo.Rows[riga].Cells[colonna].Value == " ") // messa bandiera su una cella nascosta che non ha una mina
+                    {
+                        dtg_campo.Rows[riga].Cells[colonna].Value = "🚩";
+                        BandiereSbagliate++;
+                    }
+                    else if (dtg_campo.Rows[riga].Cells[colonna].Value == "🚩") // tolta bandiera su una cella nascosta che non ha una mina
+                    {
+                        dtg_campo.Rows[riga].Cells[colonna].Value = " ";
+                        BandiereSbagliate--;
+                    }
+                }
+                MessageBox.Show("Giuste: " + BandiereGiuste.ToString() + "\nSbagliate: " + BandiereSbagliate.ToString());
+                return;
+            }
+
+            dtg_campo.ClearSelection(); // togli la selezione cosi la cella cliccata non rimane blu
+
+            if (dtg_campo.Rows[riga].Cells[colonna].Value == "🚩") // Se fai click sinistro su una bandiera ferma subito la funzione 
+            {
+                return;
+            }
+
+            if (campo[colonna, riga] != -1)
+            {
+
+                if (campo[colonna, riga] > 0)
+                {
+                    dtg_campo.Rows[riga].Cells[colonna].Value = campo[colonna, riga]; // fa vedere all'utente il valore
+                    dtg_campo.Rows[riga].Cells[colonna].Style.BackColor = Color.White;
+                }
+                else if (campo[colonna, riga] == -2)
+                {
+                    // partita persa
+                }
+                else
+                {
+                    // implementare funzione per scoprire tutte le celle fino a quando non trova quelle con i numeri, flood fill
+                    IndicaCelleVuote(colonna, riga);
+                }
+
+            }
+        }
     }
 }
