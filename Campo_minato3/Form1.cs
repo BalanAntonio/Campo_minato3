@@ -25,29 +25,8 @@ namespace Campo_minato3
         //  0   ->  Cella vuota non scoperta
         //  1 a 8 ->  Cella con numero di mine adiacenti coperto
         //  10    ->  Cella vuota scoperta
-        //  11 a 18  ->  Cella con numero di mine adiacenti NON coperto
-        //  -1   ->  Cella vuota scoperta
-        //  -2   ->  Cella con mina nascosta
-
-        static void ScopriCasella(int x, int y, ref int[,] Area)
-        {
-            if (Area[y, x] == 0)
-            {
-                Area[y, x] = 1; // Rende cella vuota scoperta e non cliccabile
-                ScopriCasella(x, y + 1, ref Area);
-                ScopriCasella(x, y - 1, ref Area);
-                ScopriCasella(x + 1, y, ref Area);
-                ScopriCasella(x - 1, y, ref Area);
-            }
-            else if (Area[y, x] <= -1 && Area[y, x] >= -8)
-            {
-                Area[y, x] *= -1;   // Rende il numero visibile
-            }
-            else if (Area[y, x] == 10)
-            {
-                // Codice di game over
-            }
-        }
+        //  10 a 18  ->  Cella NON coperta
+        //  -1   ->  Cella con mina nascosta
 
         public Form1()
         {
@@ -146,9 +125,9 @@ namespace Campo_minato3
             {
                 int x = random.Next(0, lughezzaLato);
                 int y = random.Next(0, lughezzaLato);
-                if (campo[x, y] != -2) // se la cella non è già occupata da una mina
+                if (campo[x, y] != -1) // se la cella non è già occupata da una mina
                 {
-                    campo[x, y] = -2; // posiziona la mina
+                    campo[x, y] = -1; // posiziona la mina
 
 
                     // incrementa il numero di mine adiacenti
@@ -172,7 +151,7 @@ namespace Campo_minato3
 
                         if (controlloBordi(Posx, Posy))
                         {
-                            if (campo[Posx, Posy] != -2)// se la cella non è una mina
+                            if (campo[Posx, Posy] != -1)// se la cella non è una mina
                             {
                                 campo[Posx, Posy]++;
                             } 
@@ -261,7 +240,7 @@ namespace Campo_minato3
 
             if (e.Button == MouseButtons.Right)// CLICK DESTRO PER BANDIERE
             {
-                if (campo[colonna, riga] == -2) // se c'e la mina dove hai fatto click destro
+                if (campo[colonna, riga] == -1) // se c'e la mina dove hai fatto click destro
                 {
                     if (dtg_campo.Rows[riga].Cells[colonna].Value == " ") // messa bandiera su mina nascosta
                     {
@@ -298,15 +277,15 @@ namespace Campo_minato3
                 return;
             }
 
-            if (campo[colonna, riga] != -1)
+            if (!(campo[colonna, riga] >= 10))
             {
 
-                if (campo[colonna, riga] > 0)
+                if (campo[colonna, riga] > 0 && campo[colonna, riga] < 9)
                 {
                     dtg_campo.Rows[riga].Cells[colonna].Value = campo[colonna, riga]; // fa vedere all'utente il valore
                     dtg_campo.Rows[riga].Cells[colonna].Style.BackColor = Color.White;
                 }
-                else if (campo[colonna, riga] == -2)
+                else if (campo[colonna, riga] == -1)
                 {
                     // partita persa
                 }
