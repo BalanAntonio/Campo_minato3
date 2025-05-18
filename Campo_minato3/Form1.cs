@@ -301,7 +301,7 @@ namespace Campo_minato3
             if (campo[colonna, riga] != -1)
             {
 
-                if (campo[colonna, riga] > 0)
+                if (campo[colonna, riga] > 0 && campo[colonna, riga]<10)
                 {
                     dtg_campo.Rows[riga].Cells[colonna].Value = campo[colonna, riga]; // fa vedere all'utente il valore
                     dtg_campo.Rows[riga].Cells[colonna].Style.BackColor = Color.White;
