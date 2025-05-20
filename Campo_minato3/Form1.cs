@@ -17,6 +17,8 @@ namespace Campo_minato3
         int lughezzaLato;
         int Nmine;
 
+        bool partitaPersa = false;
+
         Cmina[] mine;
 
         int[,] campo;
@@ -292,7 +294,7 @@ namespace Campo_minato3
                 return;
             }
 
-            if (!(campo[colonna, riga] >= 10))
+            if (!(campo[colonna, riga] >= 10) && !partitaPersa)
             {
 
                 if (campo[colonna, riga] > 0 && campo[colonna, riga] < 9)
@@ -302,7 +304,7 @@ namespace Campo_minato3
                 }
                 else if (campo[colonna, riga] == -1)
                 {
-                    // partita persa
+                    finePartita(); // partita persa
                 }
                 else
                 {
@@ -311,6 +313,21 @@ namespace Campo_minato3
                 }
 
             }
+        }
+
+        public void finePartita()
+        {
+            foreach (var parametro in mine)
+            {
+                dtg_campo.Rows[parametro.posY].Cells[parametro.posX].Value = "💣"; // mostra la mina
+                dtg_campo.Rows[parametro.posY].Cells[parametro.posX].Style.BackColor = Color.Red; // cambia il colore della cella in rosso
+            }
+
+            partitaPersa = true;
+
+            MessageBox.Show("Hai perso!"); // mostra il messaggio di fine partita
+
+
         }
 
         private void lbl_titolo_Click(object sender, EventArgs e)
