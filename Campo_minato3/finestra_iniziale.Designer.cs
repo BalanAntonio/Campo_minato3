@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(finestra_iniziale));
             this.lbl_titolo = new System.Windows.Forms.Label();
             this.lbl_titoloDifficolta = new System.Windows.Forms.Label();
             this.cmb_difficolta = new System.Windows.Forms.ComboBox();
@@ -84,6 +85,7 @@
             this.Controls.Add(this.cmb_difficolta);
             this.Controls.Add(this.lbl_titoloDifficolta);
             this.Controls.Add(this.lbl_titolo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "finestra_iniziale";
             this.Text = "finestra_iniziale";
             this.Load += new System.EventHandler(this.finestra_iniziale_Load);

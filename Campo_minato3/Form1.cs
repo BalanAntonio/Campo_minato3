@@ -100,17 +100,18 @@ namespace Campo_minato3
             dtg_campo.Width = (int)25 * lughezzaLato + 2;
             
             // ridimensiona la grandezza della finestra in base alla grandezza del datagridview
-            this.ClientSize = new Size(dtg_campo.Width + 20, dtg_campo.Height + 20); // +20 per il bordo della finestra
+            this.ClientSize = new Size(dtg_campo.Width + 40, dtg_campo.Height + 120); // +20 per il bordo della finestra
             
             // centra il datagridview nella finestra
-            dtg_campo.Location = new Point((this.ClientSize.Width - dtg_campo.Width) / 2, (this.ClientSize.Height - dtg_campo.Height) / 2);
+            dtg_campo.Location = new Point((this.ClientSize.Width - dtg_campo.Width) / 2, (this.ClientSize.Height - dtg_campo.Height) / 2 + 50);
+            pnl_titolo.Location = new Point((this.ClientSize.Width - pnl_titolo.Width) / 2, 10); // centra il pannello del titolo nella finestra
         }
 
         public void PrendiDifficolta()
         {
             finestra_iniziale finestra = new finestra_iniziale();
 
-            if(finestra.ShowDialog() == DialogResult.OK)
+            if (finestra.ShowDialog() == DialogResult.OK)
             {
                 lughezzaLato = finestra.lunghezza_latoIn; // prendi il numero di celle per lato
                 Nmine = finestra.NmineIn; // prendi il numero di mine
@@ -118,6 +119,8 @@ namespace Campo_minato3
 
             campo = new int[lughezzaLato, lughezzaLato]; // crea il campo di gioco
             mine = new Cmina[Nmine];
+
+            lbl_nMine.Text = $"{Nmine}"; // mostra il numero di mine nella label
         }
 
         public void posizionaMine()
@@ -286,7 +289,7 @@ namespace Campo_minato3
             {
                 if (campo[colonna, riga] == -1) // se c'e la mina dove hai fatto click destro
                 {
-                    if (dtg_campo.Rows[riga].Cells[colonna].Value == " ") // messa bandiera su mina nascosta
+                    if (dtg_campo.Rows[riga].Cells[colonna].Value == " " && BandiereGiuste + BandiereSbagliate < Nmine) // messa bandiera su mina nascosta
                     {
                         dtg_campo.Rows[riga].Cells[colonna].Value = "🚩";
                         BandiereGiuste++;
@@ -299,7 +302,7 @@ namespace Campo_minato3
                 }
                 else if (campo[colonna, riga] >= 0 && campo[colonna, riga] <= 8)
                 {
-                    if (dtg_campo.Rows[riga].Cells[colonna].Value == " ") // messa bandiera su una cella nascosta che non ha una mina
+                    if (dtg_campo.Rows[riga].Cells[colonna].Value == " " && BandiereGiuste + BandiereSbagliate < Nmine) // messa bandiera su una cella nascosta che non ha una mina
                     {
                         dtg_campo.Rows[riga].Cells[colonna].Value = "🚩";
                         BandiereSbagliate++;
@@ -309,6 +312,8 @@ namespace Campo_minato3
                         dtg_campo.Rows[riga].Cells[colonna].Value = " ";
                         BandiereSbagliate--;
                     }
+
+                    lbl_nMine.Text = $"{Nmine - BandiereGiuste - BandiereSbagliate}"; // aggiorna il numero di mine rimaste
                 }
                 MessageBox.Show("Giuste: " + BandiereGiuste.ToString() + "\nSbagliate: " + BandiereSbagliate.ToString());
                 return;
@@ -340,6 +345,26 @@ namespace Campo_minato3
                 }
 
             }
+        }
+
+        private void lbl_titolo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_nMineTitolo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_nMine_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnl_titolo_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
