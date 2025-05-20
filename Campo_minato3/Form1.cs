@@ -300,29 +300,11 @@ namespace Campo_minato3
             {
                 if (campo[colonna, riga] == -1) // se c'e la mina dove hai fatto click destro
                 {
-                    if (dtg_campo.Rows[riga].Cells[colonna].Value == " " && BandiereGiuste + BandiereSbagliate < Nmine) // messa bandiera su mina nascosta
-                    {
-                        dtg_campo.Rows[riga].Cells[colonna].Value = "🚩";
-                        BandiereGiuste++;
-                    }
-                    else if (dtg_campo.Rows[riga].Cells[colonna].Value == "🚩") // tolto bandiera su mina nascosta
-                    {
-                        dtg_campo.Rows[riga].Cells[colonna].Value = " ";
-                        BandiereGiuste--;
-                    }
+                    BandiereGiuste += ControlloBandiere(riga, colonna);
                 }
                 else if (campo[colonna, riga] >= 0 && campo[colonna, riga] <= 8)
                 {
-                    if (dtg_campo.Rows[riga].Cells[colonna].Value == " " && BandiereGiuste + BandiereSbagliate < Nmine) // messa bandiera su una cella nascosta che non ha una mina
-                    {
-                        dtg_campo.Rows[riga].Cells[colonna].Value = "🚩";
-                        BandiereSbagliate++;
-                    }
-                    else if (dtg_campo.Rows[riga].Cells[colonna].Value == "🚩") // tolta bandiera su una cella nascosta che non ha una mina
-                    {
-                        dtg_campo.Rows[riga].Cells[colonna].Value = " ";
-                        BandiereSbagliate--;
-                    }
+                    BandiereSbagliate += ControlloBandiere(riga, colonna);
 
                     lbl_nMine.Text = $"{Nmine - BandiereGiuste - BandiereSbagliate}"; // aggiorna il numero di mine rimaste
                 }
@@ -356,6 +338,22 @@ namespace Campo_minato3
                 }
 
             }
+        }
+
+        public int ControlloBandiere(int riga, int colonna)
+        {
+            if (dtg_campo.Rows[riga].Cells[colonna].Value == " " && BandiereGiuste + BandiereSbagliate < Nmine) // messa bandiera su mina nascosta
+            {
+                dtg_campo.Rows[riga].Cells[colonna].Value = "🚩";
+                return 1;
+            }
+            else if (dtg_campo.Rows[riga].Cells[colonna].Value == "🚩") // tolto bandiera su mina nascosta
+            {
+                dtg_campo.Rows[riga].Cells[colonna].Value = " ";
+                return -1;
+            }
+
+            return 0;
         }
 
         public void finePartita()
