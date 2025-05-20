@@ -13,6 +13,7 @@ namespace Campo_minato3
 {
     public partial class Form1 : Form
     {
+        public bool chiudiForm { get; private set; } = false; // per chiudere la funestra iniziale se l'utente non seleziona una difficoltà
 
         int lughezzaLato;
         int Nmine;
@@ -38,7 +39,11 @@ namespace Campo_minato3
         {
             InitializeComponent();
 
-            PrendiDifficolta();
+            if (PrendiDifficolta())
+            {
+                chiudiForm = true;
+                return;
+            }
 
             creaCelle();
 
@@ -109,7 +114,7 @@ namespace Campo_minato3
             pnl_titolo.Location = new Point((this.ClientSize.Width - pnl_titolo.Width) / 2, 10); // centra il pannello del titolo nella finestra
         }
 
-        public void PrendiDifficolta()
+        public bool PrendiDifficolta()
         {
             finestra_iniziale finestra = new finestra_iniziale();
 
@@ -117,12 +122,16 @@ namespace Campo_minato3
             {
                 lughezzaLato = finestra.lunghezza_latoIn; // prendi il numero di celle per lato
                 Nmine = finestra.NmineIn; // prendi il numero di mine
+
+                campo = new int[lughezzaLato, lughezzaLato]; // crea il campo di gioco
+                mine = new Cmina[Nmine];
+
+                lbl_nMine.Text = $"{Nmine}"; // mostra il numero di mine nella label
+
+                return false;
             }
 
-            campo = new int[lughezzaLato, lughezzaLato]; // crea il campo di gioco
-            mine = new Cmina[Nmine];
-
-            lbl_nMine.Text = $"{Nmine}"; // mostra il numero di mine nella label
+            return true;
         }
 
         public void posizionaMine()

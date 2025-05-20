@@ -14,7 +14,13 @@ namespace Campo_minato3
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+
+            var form = new Form1();
+            if (!form.chiudiForm)
+            {
+                Application.Run(form);
+            }
         }
     }
 }
