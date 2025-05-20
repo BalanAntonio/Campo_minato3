@@ -362,6 +362,22 @@ namespace Campo_minato3
             MessageBox.Show("Hai perso!"); // mostra il messaggio di fine partita
 
 
+            // ricomincia da capo
+
+            PrendiDifficolta();
+
+            fattoClickIniziale = false;
+            partitaPersa = false;
+            BandiereGiuste = 0;
+            BandiereSbagliate = 0;
+
+            Array.Clear(campo, 0, campo.Length); // imposta tutto a 0
+
+
+            creaCelle();
+            riordinaGrandezze();
+
+
         }
 
         private void lbl_titolo_Click(object sender, EventArgs e)
