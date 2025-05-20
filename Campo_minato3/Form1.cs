@@ -26,6 +26,8 @@ namespace Campo_minato3
         int BandiereGiuste = 0;
         int BandiereSbagliate = 0;
 
+        bool fattoClickIniziale = false;
+
         //  0   ->  Cella vuota non scoperta
         //  1 a 8 ->  Cella con numero di mine adiacenti coperto
         //  10    ->  Cella vuota scoperta
@@ -41,8 +43,6 @@ namespace Campo_minato3
             creaCelle();
 
             riordinaGrandezze();
-
-            posizionaMine();
         }
 
         public void creaCelle()
@@ -133,7 +133,7 @@ namespace Campo_minato3
             {
                 int x = random.Next(0, lughezzaLato);
                 int y = random.Next(0, lughezzaLato);
-                if (campo[x, y] != -1) // se la cella non è già occupata da una mina
+                if (campo[x, y] != -1 && controlloClick(x,y)) // se la cella non è già occupata da una mina
                 {
                     campo[x, y] = -1; // posiziona la mina
                     mine[minePos] = new Cmina(x, y);
@@ -144,6 +144,32 @@ namespace Campo_minato3
                     minePos++;
                 }
             }
+        }
+
+        public bool controlloClick(int xIn, int yIn) 
+        {
+            // falso = non mettere
+            for (int y = -1; y <= 1; y++)
+            {
+                for (int x = -1; x <= 1; x++)
+                {
+                    if (x != 0 || y != 0)
+                    {
+                        int Posx = xIn + x;
+                        int Posy = yIn + y;
+
+                        if (controlloBordi(Posx, Posy))
+                        {
+                            if (campo[Posx, Posy] == 100)// se la cella non è una mina
+                            {
+                                return false;
+                            }
+
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public void incrementaNumeroMineVicine(int xIn, int yIn)
@@ -252,6 +278,14 @@ namespace Campo_minato3
         {
             int riga = e.RowIndex;
             int colonna = e.ColumnIndex;
+
+            if (!fattoClickIniziale)
+            {
+                campo[colonna, riga] = 100; // do il valore 100 per indicare il click iniziale per i controlli su posizionaMine()
+                posizionaMine();
+                campo[colonna, riga] = 0; // rimetto come cella vuota
+                fattoClickIniziale = true;
+            }
 
             if (e.Button == MouseButtons.Right)// CLICK DESTRO PER BANDIERE
             {
