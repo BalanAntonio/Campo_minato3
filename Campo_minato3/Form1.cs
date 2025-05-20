@@ -317,7 +317,7 @@ namespace Campo_minato3
 
                     lbl_nMine.Text = $"{Nmine - BandiereGiuste - BandiereSbagliate}"; // aggiorna il numero di mine rimaste
                 }
-                MessageBox.Show("Giuste: " + BandiereGiuste.ToString() + "\nSbagliate: " + BandiereSbagliate.ToString());
+                //MessageBox.Show("Giuste: " + BandiereGiuste.ToString() + "\nSbagliate: " + BandiereSbagliate.ToString());
                 return;
             }
 
