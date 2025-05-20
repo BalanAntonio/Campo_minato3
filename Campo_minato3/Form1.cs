@@ -205,6 +205,12 @@ namespace Campo_minato3
                     IndicaCelleVuote(xIn, yIn + 1); // cella sotto
                     IndicaCelleVuote(xIn, yIn - 1); // cella sopra
 
+                    IndicaCelleVuote(xIn + 1, yIn+1); // cella in alto a destra
+                    IndicaCelleVuote(xIn - 1, yIn+1); // cella in alto a sinistra
+                    IndicaCelleVuote(xIn+1, yIn -1); // cella in basso a destra
+                    IndicaCelleVuote(xIn-1, yIn - 1); // cella in basso a sinistra
+
+
                 }
                 else if (campo[xIn, yIn] > 0 && campo[xIn, yIn]<10)
                 {
