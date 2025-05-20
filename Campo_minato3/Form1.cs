@@ -17,6 +17,8 @@ namespace Campo_minato3
         int lughezzaLato;
         int Nmine;
 
+        Cmina[] mine;
+
         int[,] campo;
 
         int BandiereGiuste = 0;
@@ -115,6 +117,7 @@ namespace Campo_minato3
             }
 
             campo = new int[lughezzaLato, lughezzaLato]; // crea il campo di gioco
+            mine = new Cmina[Nmine];
         }
 
         public void posizionaMine()
@@ -128,6 +131,7 @@ namespace Campo_minato3
                 if (campo[x, y] != -1) // se la cella non è già occupata da una mina
                 {
                     campo[x, y] = -1; // posiziona la mina
+                    mine[minePos] = new Cmina(x, y);
 
 
                     // incrementa il numero di mine adiacenti
