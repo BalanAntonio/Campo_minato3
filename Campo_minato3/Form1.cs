@@ -34,6 +34,7 @@ namespace Campo_minato3
         //  10    ->  Cella vuota scoperta
         //  10 a 18  ->  Cella NON coperta
         //  -1   ->  Cella con mina nascosta
+        // quando si mette una bandiera si fa valore presente -10
 
         public Form1()
         {
@@ -302,7 +303,7 @@ namespace Campo_minato3
                 {
                     BandiereGiuste += ControlloBandiere(riga, colonna);
                 }
-                else if (campo[colonna, riga] >= 0 && campo[colonna, riga] <= 8)
+                else if ((campo[colonna, riga] >= 0 && campo[colonna, riga] <= 8) || campo[colonna, riga] < -1)
                 {
                     BandiereSbagliate += ControlloBandiere(riga, colonna);
 
@@ -314,7 +315,7 @@ namespace Campo_minato3
 
             dtg_campo.ClearSelection(); // togli la selezione cosi la cella cliccata non rimane blu
 
-            if (dtg_campo.Rows[riga].Cells[colonna].Value == "🚩") // Se fai click sinistro su una bandiera ferma subito la funzione 
+            if (campo[colonna, riga] < -1) // Se fai click sinistro su una bandiera ferma subito la funzione 
             {
                 return;
             }
@@ -331,6 +332,10 @@ namespace Campo_minato3
                 {
                     finePartita(); // partita persa
                 }
+                else if (campo[colonna, riga] > 10 && !partitaPersa)
+                {
+                    int valore = campo[colonna, riga] - 10; // prendi il valore della cella senza il 10
+                }
                 else
                 {
                     // implementare funzione per scoprire tutte le celle fino a quando non trova quelle con i numeri, flood fill
@@ -342,14 +347,16 @@ namespace Campo_minato3
 
         public int ControlloBandiere(int riga, int colonna)
         {
-            if (dtg_campo.Rows[riga].Cells[colonna].Value == " " && BandiereGiuste + BandiereSbagliate < Nmine) // messa bandiera su mina nascosta
+            if (campo[colonna, riga] >= -1 && BandiereGiuste + BandiereSbagliate < Nmine) // messa bandiera su mina nascosta
             {
                 dtg_campo.Rows[riga].Cells[colonna].Value = "🚩";
+                campo [colonna, riga] -= 10; // metti bandiera e cambia il valore della cella
                 return 1;
             }
-            else if (dtg_campo.Rows[riga].Cells[colonna].Value == "🚩") // tolto bandiera su mina nascosta
+            else if (campo[colonna, riga] < -1) // tolto bandiera su mina nascosta
             {
                 dtg_campo.Rows[riga].Cells[colonna].Value = " ";
+                campo[colonna, riga] += 10; // togli bandiera e cambia il valore della cella
                 return -1;
             }
 
