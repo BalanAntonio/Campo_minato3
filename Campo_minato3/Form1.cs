@@ -325,6 +325,7 @@ namespace Campo_minato3
                 {
                     dtg_campo.Rows[riga].Cells[colonna].Value = campo[colonna, riga]; // fa vedere all'utente il valore
                     dtg_campo.Rows[riga].Cells[colonna].Style.BackColor = Color.White;
+                    IndicaCelleVuote(colonna, riga);
                 }
                 else if (campo[colonna, riga] == -1)
                 {
