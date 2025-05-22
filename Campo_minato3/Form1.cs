@@ -21,11 +21,11 @@ namespace Campo_minato3
         bool partitaPersa = false;
 
         Cmina[] mine;
+        List<Cbandiere> bandiere = new List<Cbandiere>();
 
         int[,] campo;
 
-        int BandiereGiuste = 0;
-        int BandiereSbagliate = 0;
+        int Nbandiere = 0; // numero di bandiere messe
 
         bool fattoClickIniziale = false;
 
@@ -125,7 +125,7 @@ namespace Campo_minato3
                 Nmine = finestra.NmineIn; // prendi il numero di mine
 
                 campo = new int[lughezzaLato, lughezzaLato]; // crea il campo di gioco
-                mine = new Cmina[Nmine];
+                mine = new Cmina[Nmine]; // crea l'array delle mine
 
                 lbl_nMine.Text = $"{Nmine}"; // mostra il numero di mine nella label
 
@@ -279,11 +279,6 @@ namespace Campo_minato3
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private void dtg_campo_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int riga = e.RowIndex;
@@ -301,13 +296,13 @@ namespace Campo_minato3
             {
                 if (campo[colonna, riga] == -1) // se c'e la mina dove hai fatto click destro
                 {
-                    BandiereGiuste += ControlloBandiere(riga, colonna);
+                    Nbandiere += ControlloBandiere(riga, colonna, true);
                 }
                 else if ((campo[colonna, riga] >= 0 && campo[colonna, riga] <= 8) || campo[colonna, riga] < -1)
                 {
-                    BandiereSbagliate += ControlloBandiere(riga, colonna);
+                    Nbandiere += ControlloBandiere(riga, colonna, false);
                 }
-                lbl_nMine.Text = $"{Nmine - BandiereGiuste - BandiereSbagliate}"; // aggiorna il numero di mine rimaste
+                lbl_nMine.Text = $"{Nmine - Nbandiere}"; // aggiorna il numero di mine rimaste
                 //MessageBox.Show("Giuste: " + BandiereGiuste.ToString() + "\nSbagliate: " + BandiereSbagliate.ToString());
                 return;
             }
@@ -344,18 +339,20 @@ namespace Campo_minato3
             }
         }
 
-        public int ControlloBandiere(int riga, int colonna)
+        public int ControlloBandiere(int riga, int colonna, bool bandieraGiusta)
         {
-            if (campo[colonna, riga] >= -1 && BandiereGiuste + BandiereSbagliate < Nmine) // messa bandiera su mina nascosta
+            if (campo[colonna, riga] >= -1 && Nbandiere < Nmine) // messa bandiera su mina nascosta
             {
                 dtg_campo.Rows[riga].Cells[colonna].Value = "🚩";
                 campo [colonna, riga] -= 10; // metti bandiera e cambia il valore della cella
+                bandiere.Add(new Cbandiere(colonna, riga, bandieraGiusta)); // aggiungi la bandiera alla lista
                 return 1;
             }
             else if (campo[colonna, riga] < -1) // tolto bandiera su mina nascosta
             {
                 dtg_campo.Rows[riga].Cells[colonna].Value = " ";
                 campo[colonna, riga] += 10; // togli bandiera e cambia il valore della cella
+                bandiere.RemoveAll(b => b.posX == colonna && b.posY == riga); // rimuovi la bandiera dalla lista
                 return -1;
             }
 
@@ -370,6 +367,18 @@ namespace Campo_minato3
                 dtg_campo.Rows[parametro.posY].Cells[parametro.posX].Style.BackColor = Color.Red; // cambia il colore della cella in rosso
             }
 
+            foreach (var parametro in bandiere)
+            {
+                if (!parametro.postoGiusto)
+                {
+                    dtg_campo.Rows[parametro.posY].Cells[parametro.posX].Value = "❌"; // mostra la bandiera sbagliata
+                }
+                else
+                {
+                    dtg_campo.Rows[parametro.posY].Cells[parametro.posX].Value = "🚩"; // mostra la bandiera giusta
+                }
+            }
+
             partitaPersa = true;
 
             MessageBox.Show("Hai perso!"); // mostra il messaggio di fine partita
@@ -381,8 +390,7 @@ namespace Campo_minato3
 
             fattoClickIniziale = false;
             partitaPersa = false;
-            BandiereGiuste = 0;
-            BandiereSbagliate = 0;
+            Nbandiere = 0; // numero di bandiere messe
 
             Array.Clear(campo, 0, campo.Length); // imposta tutto a 0
 
@@ -407,6 +415,11 @@ namespace Campo_minato3
         }
 
         private void pnl_titolo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
