@@ -275,8 +275,9 @@ namespace Campo_minato3
             int riga = e.RowIndex;
             int colonna = e.ColumnIndex;
 
-            if (e.Button == MouseButtons.Middle) { // per debug
+            if (e.Button == MouseButtons.Middle) { // per debug: fa vedere il contenuto della cella nell'array
                 MessageBox.Show(campo[colonna, riga].ToString());
+                return;
             }
 
             if (!fattoClickIniziale && e.Button==MouseButtons.Left)
