@@ -318,7 +318,7 @@ namespace Campo_minato3
                 return;
             }
 
-            if (!(campo[colonna, riga] >= 10) && !partitaPersa)
+            if (campo[colonna, riga] <= 8 && campo[colonna, riga] >= -1 && !partitaPersa)
             {
 
                 if (campo[colonna, riga] > 0 && campo[colonna, riga] < 9)
@@ -346,7 +346,7 @@ namespace Campo_minato3
 
         public int ControlloBandiere(int riga, int colonna, bool bandieraGiusta)
         {
-            if (campo[colonna, riga] >= -1 && Nbandiere < Nmine) // messa bandiera su mina nascosta
+            if (campo[colonna, riga] >= -1 && campo[colonna, riga] <= 8 && Nbandiere < Nmine) // messa bandiera su mina nascosta
             {
                 dtg_campo.Rows[riga].Cells[colonna].Value = "🚩";
                 campo [colonna, riga] -= 10; // metti bandiera e cambia il valore della cella
