@@ -42,14 +42,27 @@ namespace Campo_minato3
         {
             InitializeComponent();
 
+            inizio();
+        }
+
+        public void inizio()
+        {
             if (PrendiDifficolta())
             {
                 chiudiForm = true;
+                this.Close(); // chiude Form1
                 return;
             }
 
-            creaCelle();
+            fattoClickIniziale = false;
+            partitaPersa = false;
+            Nbandiere = 0; // numero di bandiere messe
 
+            Array.Clear(campo, 0, campo.Length); // imposta tutto a 0
+            bandiere.Clear(); // svuota la lista delle bandiere
+
+
+            creaCelle();
             riordinaGrandezze();
         }
 
@@ -362,18 +375,7 @@ namespace Campo_minato3
 
 
             // ricomincia da capo
-
-            PrendiDifficolta();
-
-            fattoClickIniziale = false;
-            partitaPersa = false;
-            Nbandiere = 0; // numero di bandiere messe
-
-            Array.Clear(campo, 0, campo.Length); // imposta tutto a 0
-
-
-            creaCelle();
-            riordinaGrandezze();
+            inizio();
         }
 
         private void lbl_titolo_Click(object sender, EventArgs e)
