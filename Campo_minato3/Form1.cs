@@ -389,8 +389,6 @@ namespace Campo_minato3
 
             creaCelle();
             riordinaGrandezze();
-
-
         }
 
         private void lbl_titolo_Click(object sender, EventArgs e)
