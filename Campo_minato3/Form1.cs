@@ -57,6 +57,7 @@ namespace Campo_minato3
             fattoClickIniziale = false;
             partitaPersa = false;
             Nbandiere = 0; // numero di bandiere messe
+            BlocchiScoperti = 0;
 
             Array.Clear(campo, 0, campo.Length); // imposta tutto a 0
             bandiere.Clear(); // svuota la lista delle bandiere
@@ -226,11 +227,11 @@ namespace Campo_minato3
         {
             if(controlloBordi(xIn, yIn))
             {
-                BlocchiScoperti++;
+                
 
                 if (campo[xIn, yIn] == 0)
                 {
-
+                    BlocchiScoperti++;
                     dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.White; // cambia il colore della cella in bianco
                     campo[xIn, yIn] = 10; // rende la cella scoperta
 
@@ -248,6 +249,7 @@ namespace Campo_minato3
                 }
                 else if (campo[xIn, yIn] > 0 && campo[xIn, yIn]<10)
                 {
+                    BlocchiScoperti++;
                     dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.White; // cambia il colore della cella in bianco
                     dtg_campo.Rows[yIn].Cells[xIn].Value = campo[xIn, yIn];
                     
@@ -273,7 +275,7 @@ namespace Campo_minato3
             int riga = e.RowIndex;
             int colonna = e.ColumnIndex;
 
-            if (!fattoClickIniziale)
+            if (!fattoClickIniziale && e.Button==MouseButtons.Left)
             {
                 campo[colonna, riga] = 100; // do il valore 100 per indicare il click iniziale per i controlli su posizionaMine()
                 posizionaMine();
@@ -327,6 +329,12 @@ namespace Campo_minato3
                 }
 
             }
+
+            if(BlocchiScoperti==lughezzaLato*lughezzaLato - Nmine)
+            {
+                MessageBox.Show("Hai vinto!");
+                inizio();
+            }
         }
 
         public int ControlloBandiere(int riga, int colonna, bool bandieraGiusta)
@@ -376,6 +384,32 @@ namespace Campo_minato3
 
             // ricomincia da capo
             inizio();
+        }
+        
+        public int contaBandiereAdiacenti(int xIn, int yIn)
+        {
+            int bandiere = 0;
+            for (int y = -1; y <= 1; y++)
+            {
+                for (int x = -1; x <= 1; x++)
+                {
+                    if (x != 0 || y != 0)
+                    {
+                        int Posx = xIn + x;
+                        int Posy = yIn + y;
+
+                        if (controlloBordi(Posx, Posy))
+                        {
+                            if (campo[Posx,Posy]<=-2 && campo[Posx, Posy] >= -9) // se la cella è una bandiera
+                            {
+                                bandiere++;
+                            }
+
+                        }
+                    }
+                }
+            }
+            return bandiere;
         }
 
         private void lbl_titolo_Click(object sender, EventArgs e)
