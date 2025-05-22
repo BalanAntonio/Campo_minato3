@@ -47,7 +47,6 @@
             this.dtg_campo.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dtg_campo.Size = new System.Drawing.Size(687, 403);
             this.dtg_campo.TabIndex = 0;
-            this.dtg_campo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_campo_CellContentClick);
             this.dtg_campo.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dtg_campo_CellMouseClick);
             // 
             // lbl_titolo

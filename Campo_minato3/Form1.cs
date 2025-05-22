@@ -209,34 +209,6 @@ namespace Campo_minato3
             }
         }
 
-        private void dtg_campo_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            /*
-            //if(e)
-            // prende le coordinate della cella cliccata
-            int riga = e.RowIndex;
-            int colonna = e.ColumnIndex;
-            dtg_campo.ClearSelection();
-            if (campo[colonna, riga] != -1){
-
-                if (campo[colonna, riga] > 0)
-                {
-                    dtg_campo.Rows[riga].Cells[colonna].Value = campo[colonna, riga]; // fa vedere all'utente il valore
-                    dtg_campo.Rows[riga].Cells[colonna].Style.BackColor = Color.White;
-                }
-                else if (campo[colonna, riga] == -2)
-                {
-                    // partita persa
-                }
-                else
-                {
-                    // implementare funzione per scoprire tutte le celle fino a quando non trova quelle con i numeri, flood fill
-                    IndicaCelleVuote(colonna, riga);
-                }
-
-            }*/
-        }
-
         public void IndicaCelleVuote(int xIn, int yIn)
         {
             if(controlloBordi(xIn, yIn))
