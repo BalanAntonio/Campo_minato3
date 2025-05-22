@@ -34,7 +34,7 @@ namespace Campo_minato3
         //  0   ->  Cella vuota non scoperta
         //  1 a 8 ->  Cella con numero di mine adiacenti coperto
         //  10    ->  Cella vuota scoperta
-        //  10 a 18  ->  Cella NON coperta
+        //  11 a 18  ->  Cella con numero scoperta
         //  -1   ->  Cella con mina nascosta
         // quando si mette una bandiera si fa valore presente -10
 
@@ -275,6 +275,10 @@ namespace Campo_minato3
             int riga = e.RowIndex;
             int colonna = e.ColumnIndex;
 
+            if (e.Button == MouseButtons.Middle) { // per debug
+                MessageBox.Show(campo[colonna, riga].ToString());
+            }
+
             if (!fattoClickIniziale && e.Button==MouseButtons.Left)
             {
                 campo[colonna, riga] = 100; // do il valore 100 per indicare il click iniziale per i controlli su posizionaMine()
@@ -400,7 +404,8 @@ namespace Campo_minato3
 
                         if (controlloBordi(Posx, Posy))
                         {
-                            if (campo[Posx,Posy]<=-2 && campo[Posx, Posy] >= -9) // se la cella è una bandiera
+                            //MessageBox.Show(campo[Posx, Posy].ToString());
+                            if (campo[Posx, Posy]==-11 || (campo[Posx,Posy]<=-2 && campo[Posx, Posy] >= -9)) // se la cella è una bandiera
                             {
                                 bandiere++;
                             }
@@ -435,6 +440,68 @@ namespace Campo_minato3
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void dtg_campo_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dtg_campo.ClearSelection(); // togli la selezione cosi la cella cliccata non rimane blu
+            int riga = e.RowIndex;
+            int colonna = e.ColumnIndex;
+
+            //MessageBox.Show(contaBandiereAdiacenti(colonna, riga).ToString() + ", " + (campo[colonna, riga] - 10));
+
+            if (campo[colonna, riga] >= 11 && campo[colonna, riga] <= 18 && contaBandiereAdiacenti(colonna,riga) == campo[colonna, riga] - 10)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    for (int x = -1; x <= 1; x++)
+                    {
+                        
+                        if (x != 0 || y != 0)
+                        {
+                            int Posx = colonna + x;
+                            int Posy = riga + y;
+                            if (controlloBordi(Posx, Posy))
+                            {
+                                if(!((campo[Posx, Posy] <= -2 && campo[Posx, Posy] >= -9) || campo[Posx, Posy]==-11))
+                                {
+
+                                    if (campo[Posx, Posy] <= 8 && campo[Posx, Posy] >= -1 && !partitaPersa)
+                                    {
+
+                                        if (campo[Posx, Posy] > 0 && campo[Posx, Posy] < 9)
+                                        {
+                                            dtg_campo.Rows[Posy].Cells[Posx].Value = campo[Posx, Posy]; // fa vedere all'utente il valore
+                                            dtg_campo.Rows[Posy].Cells[Posx].Style.BackColor = Color.White;
+                                            IndicaCelleVuote(Posx, Posy);
+                                        }
+                                        else if (campo[Posx, Posy] == -1)
+                                        {
+                                            finePartita(); // partita persa
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            // implementare funzione per scoprire tutte le celle fino a quando non trova quelle con i numeri, flood fill
+                                            IndicaCelleVuote(Posx, Posy);
+                                        }
+
+                                    }
+
+                                    if (BlocchiScoperti == lughezzaLato * lughezzaLato - Nmine)
+                                    {
+                                        MessageBox.Show("Hai vinto!");
+                                        inizio();
+                                        return;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
         }
     }
 }
