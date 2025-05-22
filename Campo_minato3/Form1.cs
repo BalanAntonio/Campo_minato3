@@ -29,6 +29,8 @@ namespace Campo_minato3
 
         bool fattoClickIniziale = false;
 
+        int BlocchiScoperti = 0;
+
         //  0   ->  Cella vuota non scoperta
         //  1 a 8 ->  Cella con numero di mine adiacenti coperto
         //  10    ->  Cella vuota scoperta
@@ -239,6 +241,8 @@ namespace Campo_minato3
         {
             if(controlloBordi(xIn, yIn))
             {
+                BlocchiScoperti++;
+
                 if (campo[xIn, yIn] == 0)
                 {
 
@@ -393,6 +397,8 @@ namespace Campo_minato3
 
 
         }
+
+        private void
 
         private void lbl_titolo_Click(object sender, EventArgs e)
         {
