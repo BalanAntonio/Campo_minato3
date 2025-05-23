@@ -179,19 +179,16 @@ namespace Campo_minato3
             {
                 for (int x = -1; x <= 1; x++)
                 {
-                    if (x != 0 || y != 0)
+                    int Posx = xIn + x;
+                    int Posy = yIn + y;
+
+                    if (controlloBordi(Posx, Posy))
                     {
-                        int Posx = xIn + x;
-                        int Posy = yIn + y;
-
-                        if (controlloBordi(Posx, Posy))
+                        if (campo[Posx, Posy] == 100)// se la cella non è una mina
                         {
-                            if (campo[Posx, Posy] == 100)// se la cella non è una mina
-                            {
-                                return false;
-                            }
-
+                            return false;
                         }
+
                     }
                 }
             }
