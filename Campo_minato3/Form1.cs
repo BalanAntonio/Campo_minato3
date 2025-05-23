@@ -16,6 +16,7 @@ namespace Campo_minato3
         public bool chiudiForm { get; private set; } = false; // per chiudere la funestra iniziale se l'utente non seleziona una difficoltà
 
         int lughezzaLato;
+        int altezzaLato = 1;
         int Nmine;
 
         bool partitaPersa = false;
@@ -86,7 +87,7 @@ namespace Campo_minato3
             }
 
             // creazione righe
-            for (int i = 0; i < lughezzaLato; i++)
+            for (int i = 0; i < altezzaLato; i++)
             {
                 dtg_campo.Rows.Add();
                 dtg_campo.Rows[i].Height = 25;
@@ -120,7 +121,7 @@ namespace Campo_minato3
         public void riordinaGrandezze()
         {
             // ridimensiona la grandezza del datagridview in base alla grandezza delle celle
-            dtg_campo.Height = (int)25 * lughezzaLato + 2;
+            dtg_campo.Height = (int)25 * altezzaLato + 2;
             dtg_campo.Width = (int)25 * lughezzaLato + 2;
             
             // ridimensiona la grandezza della finestra in base alla grandezza del datagridview
@@ -138,9 +139,10 @@ namespace Campo_minato3
             if (finestra.ShowDialog() == DialogResult.OK)
             {
                 lughezzaLato = finestra.lunghezza_latoIn; // prendi il numero di celle per lato
+                altezzaLato = finestra.altezza_latoIn;
                 Nmine = finestra.NmineIn; // prendi il numero di mine
 
-                campo = new int[lughezzaLato, lughezzaLato]; // crea il campo di gioco
+                campo = new int[lughezzaLato, altezzaLato]; // crea il campo di gioco
                 mine = new Cmina[Nmine]; // crea l'array delle mine
 
                 lbl_nMine.Text = $"{Nmine}"; // mostra il numero di mine nella label
@@ -158,7 +160,7 @@ namespace Campo_minato3
             while (minePos < Nmine)
             {
                 int x = random.Next(0, lughezzaLato);
-                int y = random.Next(0, lughezzaLato);
+                int y = random.Next(0, altezzaLato);
                 if (campo[x, y] != -1 && controlloClick(x,y)) // se la cella non è già occupata da una mina
                 {
                     campo[x, y] = -1; // posiziona la mina
@@ -257,7 +259,7 @@ namespace Campo_minato3
 
         public bool controlloBordi(int xIn, int yIn)
         {
-            if (xIn < 0 || xIn >= lughezzaLato || yIn < 0 || yIn >= lughezzaLato)
+            if (xIn < 0 || xIn >= lughezzaLato || yIn < 0 || yIn >= altezzaLato)
             {
                 return false; // esci dalla funzione se le coordinate sono fuori dai bordi
             }
@@ -332,7 +334,7 @@ namespace Campo_minato3
 
             }
 
-            if(BlocchiScoperti==lughezzaLato*lughezzaLato - Nmine)
+            if(BlocchiScoperti==lughezzaLato* altezzaLato - Nmine)
             {
                 MessageBox.Show("Hai vinto!");
                 inizio();
@@ -486,7 +488,7 @@ namespace Campo_minato3
 
                                     }
 
-                                    if (BlocchiScoperti == lughezzaLato * lughezzaLato - Nmine)
+                                    if (BlocchiScoperti == lughezzaLato * altezzaLato - Nmine)
                                     {
                                         MessageBox.Show("Hai vinto!");
                                         inizio();

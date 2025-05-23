@@ -14,6 +14,7 @@ namespace Campo_minato3
     {
 
         public int lunghezza_latoIn { get; set; }
+        public int altezza_latoIn { get; set; }
         public int NmineIn { get; set; }
 
         public finestra_iniziale()
@@ -34,17 +35,20 @@ namespace Campo_minato3
             if (difficolta == "facile")
             {
                 lunghezza_latoIn = 9;
+                altezza_latoIn = 9;
                 NmineIn = 10;
             }
             else if (difficolta == "medio")
             {
                 lunghezza_latoIn = 16;
+                altezza_latoIn = 16;
                 NmineIn = 40;
             }
             else if (difficolta == "difficile")
             {
                 lunghezza_latoIn = 30;
-                NmineIn = 100;
+                altezza_latoIn = 16;
+                NmineIn = 99;
             }
 
             DialogResult = DialogResult.OK;
