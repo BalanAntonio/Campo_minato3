@@ -417,31 +417,6 @@ namespace Campo_minato3
             return bandiere;
         }
 
-        private void lbl_titolo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl_nMineTitolo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl_nMine_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnl_titolo_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void dtg_campo_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             dtg_campo.ClearSelection(); // togli la selezione cosi la cella cliccata non rimane blu
@@ -502,6 +477,31 @@ namespace Campo_minato3
                 }
             }
             
+        }
+
+        private void lbl_titolo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_nMineTitolo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_nMine_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnl_titolo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
