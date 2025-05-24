@@ -309,36 +309,7 @@ namespace Campo_minato3
                 return;
             }
 
-            if (campo[colonna, riga] <= 8 && campo[colonna, riga] >= -1 && !partitaPersa)
-            {
-
-                if (campo[colonna, riga] > 0 && campo[colonna, riga] < 9)
-                {
-                    dtg_campo.Rows[riga].Cells[colonna].Value = campo[colonna, riga]; // fa vedere all'utente il valore
-                    dtg_campo.Rows[riga].Cells[colonna].Style.BackColor = Color.White;
-                    IndicaCelleVuote(colonna, riga);
-                }
-                else if (campo[colonna, riga] == -1)
-                {
-                    finePartita(); // partita persa
-                }
-                else if (campo[colonna, riga] > 10 && !partitaPersa)
-                {
-                    int valore = campo[colonna, riga] - 10; // prendi il valore della cella senza il 10
-                }
-                else
-                {
-                    // implementare funzione per scoprire tutte le celle fino a quando non trova quelle con i numeri, flood fill
-                    IndicaCelleVuote(colonna, riga);
-                }
-
-            }
-
-            if(BlocchiScoperti==lughezzaLato* altezzaLato - Nmine)
-            {
-                MessageBox.Show("Hai vinto!");
-                inizio();
-            }
+            cellaCliccata(colonna, riga);
         }
 
         public int ControlloBandiere(int riga, int colonna, bool bandieraGiusta)
@@ -405,7 +376,7 @@ namespace Campo_minato3
                         if (controlloBordi(Posx, Posy))
                         {
                             //MessageBox.Show(campo[Posx, Posy].ToString());
-                            if (campo[Posx, Posy]==-11 || (campo[Posx,Posy]<=-2 && campo[Posx, Posy] >= -9)) // se la cella è una bandiera
+                            if (campo[Posx, Posy] < -1) // se la cella è una bandiera
                             {
                                 bandiere++;
                             }
@@ -438,38 +409,12 @@ namespace Campo_minato3
                             int Posy = riga + y;
                             if (controlloBordi(Posx, Posy))
                             {
-                                if(!((campo[Posx, Posy] <= -2 && campo[Posx, Posy] >= -9) || campo[Posx, Posy]==-11))
+                                if(!(campo[Posx, Posy] < -1))
                                 {
-
-                                    if (campo[Posx, Posy] <= 8 && campo[Posx, Posy] >= -1 && !partitaPersa)
+                                    if(cellaCliccata(Posx, Posy))
                                     {
-
-                                        if (campo[Posx, Posy] > 0 && campo[Posx, Posy] < 9)
-                                        {
-                                            dtg_campo.Rows[Posy].Cells[Posx].Value = campo[Posx, Posy]; // fa vedere all'utente il valore
-                                            dtg_campo.Rows[Posy].Cells[Posx].Style.BackColor = Color.White;
-                                            IndicaCelleVuote(Posx, Posy);
-                                        }
-                                        else if (campo[Posx, Posy] == -1)
-                                        {
-                                            finePartita(); // partita persa
-                                            return;
-                                        }
-                                        else
-                                        {
-                                            // implementare funzione per scoprire tutte le celle fino a quando non trova quelle con i numeri, flood fill
-                                            IndicaCelleVuote(Posx, Posy);
-                                        }
-
-                                    }
-
-                                    if (BlocchiScoperti == lughezzaLato * altezzaLato - Nmine)
-                                    {
-                                        MessageBox.Show("Hai vinto!");
-                                        inizio();
                                         return;
                                     }
-
                                 }
                             }
                         }
@@ -477,6 +422,42 @@ namespace Campo_minato3
                 }
             }
             
+        }
+
+        public bool cellaCliccata(int Posx, int Posy)
+        {
+
+            if (campo[Posx, Posy] <= 8 && campo[Posx, Posy] >= -1 && !partitaPersa)
+            {
+
+                if (campo[Posx, Posy] > 0 && campo[Posx, Posy] < 9)
+                {
+                    dtg_campo.Rows[Posy].Cells[Posx].Value = campo[Posx, Posy]; // fa vedere all'utente il valore
+                    dtg_campo.Rows[Posy].Cells[Posx].Style.BackColor = Color.White;
+                    IndicaCelleVuote(Posx, Posy);
+                }
+                else if (campo[Posx, Posy] == -1)
+                {
+                    finePartita(); // partita persa
+                    return true;
+                }
+                else
+                {
+                    // implementare funzione per scoprire tutte le celle fino a quando non trova quelle con i numeri, flood fill
+                    IndicaCelleVuote(Posx, Posy);
+                }
+
+            }
+
+            if (BlocchiScoperti == lughezzaLato * altezzaLato - Nmine)
+            {
+                MessageBox.Show("Hai vinto!");
+                inizio();
+                return true;
+            }
+
+            return false;
+
         }
 
         private void lbl_titolo_Click(object sender, EventArgs e)
