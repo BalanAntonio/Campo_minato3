@@ -95,7 +95,7 @@ namespace Campo_minato3
                 // da ad ogni cella il colore e il tag 0 che indica l'acqua
                 for (int j = 0; j < lughezzaLato; j++)
                 {
-                    dtg_campo.Rows[i].Cells[j].Style.BackColor = Color.LightBlue;
+                    dtg_campo.Rows[i].Cells[j].Style.BackColor = Color.FromArgb(189, 189, 189);
                     dtg_campo.Rows[i].Cells[j].Tag = 0;
                     dtg_campo.Rows[i].Cells[j].Value = " ";
                 }
@@ -231,7 +231,7 @@ namespace Campo_minato3
                 if (campo[xIn, yIn] == 0)
                 {
                     BlocchiScoperti++;
-                    dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.White; // cambia il colore della cella in bianco
+                    dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.FromArgb(240, 240, 240); // cambia il colore
                     campo[xIn, yIn] = 10; // rende la cella scoperta
 
                     IndicaCelleVuote(xIn + 1, yIn); // cella a destra
@@ -249,7 +249,7 @@ namespace Campo_minato3
                 else if (campo[xIn, yIn] > 0 && campo[xIn, yIn]<10)
                 {
                     BlocchiScoperti++;
-                    dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.White; // cambia il colore della cella in bianco
+                    dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.FromArgb(240, 240, 240);
                     dtg_campo.Rows[yIn].Cells[xIn].Value = campo[xIn, yIn];
                     
                     campo[xIn, yIn] += 10; // rende la cella scoperta e non cliccabile
@@ -433,7 +433,7 @@ namespace Campo_minato3
                 if (campo[Posx, Posy] > 0 && campo[Posx, Posy] < 9)
                 {
                     dtg_campo.Rows[Posy].Cells[Posx].Value = campo[Posx, Posy]; // fa vedere all'utente il valore
-                    dtg_campo.Rows[Posy].Cells[Posx].Style.BackColor = Color.White;
+                    dtg_campo.Rows[Posy].Cells[Posx].Style.BackColor = Color.FromArgb(240, 240, 240);
                     IndicaCelleVuote(Posx, Posy);
                 }
                 else if (campo[Posx, Posy] == -1)
