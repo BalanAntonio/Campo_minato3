@@ -10,7 +10,6 @@ namespace Campo_minato3
     {
         public int posX { get; set; }
         public int posY { get; set; }
-        public bool scoperta { get; set; } = false;
 
         public Cmina()
         {

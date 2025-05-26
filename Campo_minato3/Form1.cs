@@ -32,6 +32,18 @@ namespace Campo_minato3
 
         int BlocchiScoperti = 0;
 
+         Color[] coloriNumeri = new Color[]
+        {
+            Color.FromArgb(0, 0, 255),       // 1 - Blu
+            Color.FromArgb(0, 128, 0),       // 2 - Verde
+            Color.FromArgb(255, 0, 0),       // 3 - Rosso
+            Color.FromArgb(0, 0, 139),       // 4 - Blu scuro
+            Color.FromArgb(139, 69, 19),     // 5 - Marrone scuro
+            Color.FromArgb(72, 209, 204),    // 6 - Ciano scuro
+            Color.FromArgb(0, 0, 0),         // 7 - Nero
+            Color.FromArgb(105, 105, 105)    // 8 - Grigio scuro
+        };
+
         //  0   ->  Cella vuota non scoperta
         //  1 a 8 ->  Cella con numero di mine adiacenti coperto
         //  10    ->  Cella vuota scoperta
