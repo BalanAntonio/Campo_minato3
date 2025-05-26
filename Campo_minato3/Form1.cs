@@ -108,7 +108,6 @@ namespace Campo_minato3
                 for (int j = 0; j < lughezzaLato; j++)
                 {
                     dtg_campo.Rows[i].Cells[j].Style.BackColor = Color.FromArgb(189, 189, 189);
-                    dtg_campo.Rows[i].Cells[j].Tag = 0;
                     dtg_campo.Rows[i].Cells[j].Value = " ";
                 }
             }
@@ -262,6 +261,7 @@ namespace Campo_minato3
                 {
                     BlocchiScoperti++;
                     dtg_campo.Rows[yIn].Cells[xIn].Style.BackColor = Color.FromArgb(240, 240, 240);
+                    dtg_campo.Rows[yIn].Cells[xIn].Style.ForeColor = coloriNumeri[campo[xIn, yIn]];
                     dtg_campo.Rows[yIn].Cells[xIn].Value = campo[xIn, yIn];
                     
                     campo[xIn, yIn] += 10; // rende la cella scoperta e non cliccabile
@@ -445,7 +445,8 @@ namespace Campo_minato3
                 if (campo[Posx, Posy] > 0 && campo[Posx, Posy] < 9)
                 {
                     dtg_campo.Rows[Posy].Cells[Posx].Value = campo[Posx, Posy]; // fa vedere all'utente il valore
-                    dtg_campo.Rows[Posy].Cells[Posx].Style.BackColor = Color.FromArgb(240, 240, 240);
+                    dtg_campo.Rows[Posy].Cells[Posx].Style.BackColor = Color.FromArgb(240, 240, 240); // colore sfondo
+                    dtg_campo.Rows[Posy].Cells[Posx].Style.ForeColor = coloriNumeri[campo[Posx, Posy]];
                     IndicaCelleVuote(Posx, Posy);
                 }
                 else if (campo[Posx, Posy] == -1)
