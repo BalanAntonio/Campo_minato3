@@ -39,6 +39,7 @@
             this.lbl_TempoCorrenteTitolo = new System.Windows.Forms.Label();
             this.lbl_migliorTempo = new System.Windows.Forms.Label();
             this.lbl_tempoCorrente = new System.Windows.Forms.Label();
+            this.btn_resetta = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl_titolo
@@ -146,11 +147,22 @@
             this.lbl_tempoCorrente.Text = "--";
             this.lbl_tempoCorrente.Click += new System.EventHandler(this.lbl_tempoCorrente_Click);
             // 
+            // btn_resetta
+            // 
+            this.btn_resetta.Location = new System.Drawing.Point(261, 175);
+            this.btn_resetta.Name = "btn_resetta";
+            this.btn_resetta.Size = new System.Drawing.Size(97, 23);
+            this.btn_resetta.TabIndex = 10;
+            this.btn_resetta.Text = "resetta tempo";
+            this.btn_resetta.UseVisualStyleBackColor = true;
+            this.btn_resetta.Click += new System.EventHandler(this.btn_resetta_Click);
+            // 
             // finestra_iniziale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(438, 241);
+            this.Controls.Add(this.btn_resetta);
             this.Controls.Add(this.lbl_tempoCorrente);
             this.Controls.Add(this.lbl_migliorTempo);
             this.Controls.Add(this.lbl_TempoCorrenteTitolo);
@@ -182,5 +194,6 @@
         private System.Windows.Forms.Label lbl_TempoCorrenteTitolo;
         private System.Windows.Forms.Label lbl_migliorTempo;
         private System.Windows.Forms.Label lbl_tempoCorrente;
+        private System.Windows.Forms.Button btn_resetta;
     }
 }
