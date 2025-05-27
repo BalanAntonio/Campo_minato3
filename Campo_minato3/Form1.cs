@@ -4,11 +4,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Media;
 
 namespace Campo_minato3
 {
@@ -16,6 +17,9 @@ namespace Campo_minato3
     {
         
         public bool chiudiForm { get; private set; } = false; // per chiudere la funestra iniziale se l'utente non seleziona una difficoltà
+
+        System.Windows.Forms.Timer cronometro;
+        int secondi = 0;
 
         int lughezzaLato;
         int altezzaLato = 1;
@@ -80,6 +84,15 @@ namespace Campo_minato3
                 return;
             }
 
+            lbl_tempo.Text = "0 s"; // resetta il tempo
+            secondi = 0; // resetta il tempo
+
+            // inizia a contare il tempo
+            cronometro = new System.Windows.Forms.Timer();
+            cronometro.Interval = 1000; // ogni secondo
+            cronometro.Tick += contaTempo;
+            cronometro.Start();
+
             fattoClickIniziale = false;
             partitaPersa = false;
             Nbandiere = 0; // numero di bandiere messe
@@ -91,6 +104,14 @@ namespace Campo_minato3
 
             creaCelle();
             riordinaGrandezze();
+        }
+
+        public void contaTempo(object sender, EventArgs e)
+        {
+            secondi++;
+
+            //lbl_tempo.Invoke((MethodInvoker)(() => lbl_tempo.Text = $"{secondi} s"));
+            lbl_tempo.Text = $"{secondi} s";
         }
 
         public void creaCelle()
@@ -380,6 +401,8 @@ namespace Campo_minato3
 
             partitaPersa = true;
 
+            cronometro.Stop();
+
             // ricomincia da capo
             inizio("Hai perso!!!");
         }
@@ -476,6 +499,7 @@ namespace Campo_minato3
             
             if (BlocchiScoperti == lughezzaLato * altezzaLato - Nmine)
             {
+                cronometro.Stop();
                 souni[4].Play();
                 inizio("Hai vinto!!!");
                 return true;
@@ -507,7 +531,17 @@ namespace Campo_minato3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //aa
+            
+        }
+
+        private void lbl_tempoTitolo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_tempo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

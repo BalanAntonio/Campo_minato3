@@ -98,5 +98,35 @@ namespace Campo_minato3
         {
 
         }
+
+        private void lbl_migliorTempoTitolo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_TempoCorrenteTitolo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_migliorTempo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_tempoCorrente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_temaTitolo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmb_tema_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
