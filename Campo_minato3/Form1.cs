@@ -15,6 +15,7 @@ namespace Campo_minato3
 {
     public partial class Form1 : Form
     {
+        
         public bool chiudiForm { get; private set; } = false; // per chiudere la funestra iniziale se l'utente non seleziona una difficoltà
 
         System.Windows.Forms.Timer cronometro;
@@ -38,11 +39,11 @@ namespace Campo_minato3
         int BlocchiScoperti = 0;
 
         SoundPlayer[] souni = new SoundPlayer[] {
-            new SoundPlayer(@"perso.wav"),
-            new SoundPlayer(@"click_bandiera.wav"),
-            new SoundPlayer(@"click_doppio.wav"),
-            new SoundPlayer(@"click_normale.wav"),
-            new SoundPlayer(@"vittoria.wav")
+            new SoundPlayer(Properties.Resources.perso),
+            new SoundPlayer(Properties.Resources.click_bandiera),
+            new SoundPlayer(Properties.Resources.click_doppio),
+            new SoundPlayer(Properties.Resources.click_normale),
+            new SoundPlayer(Properties.Resources.vittoria)
 
         };
         
@@ -494,7 +495,7 @@ namespace Campo_minato3
                 }
 
             }
-
+            
             if (BlocchiScoperti == lughezzaLato * altezzaLato - Nmine)
             {
                 cronometro.Stop();
