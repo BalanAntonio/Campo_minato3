@@ -33,6 +33,7 @@
             this.lbl_titoloDifficolta = new System.Windows.Forms.Label();
             this.cmb_difficolta = new System.Windows.Forms.ComboBox();
             this.btn_inserisci = new System.Windows.Forms.Button();
+            this.cmb_tema = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lbl_titolo
@@ -76,11 +77,20 @@
             this.btn_inserisci.UseVisualStyleBackColor = true;
             this.btn_inserisci.Click += new System.EventHandler(this.btn_inserisci_Click);
             // 
+            // cmb_tema
+            // 
+            this.cmb_tema.FormattingEnabled = true;
+            this.cmb_tema.Location = new System.Drawing.Point(80, 175);
+            this.cmb_tema.Name = "cmb_tema";
+            this.cmb_tema.Size = new System.Drawing.Size(121, 21);
+            this.cmb_tema.TabIndex = 4;
+            // 
             // finestra_iniziale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(438, 241);
+            this.Controls.Add(this.cmb_tema);
             this.Controls.Add(this.btn_inserisci);
             this.Controls.Add(this.cmb_difficolta);
             this.Controls.Add(this.lbl_titoloDifficolta);
@@ -100,5 +110,6 @@
         private System.Windows.Forms.Label lbl_titoloDifficolta;
         private System.Windows.Forms.ComboBox cmb_difficolta;
         private System.Windows.Forms.Button btn_inserisci;
+        private System.Windows.Forms.ComboBox cmb_tema;
     }
 }

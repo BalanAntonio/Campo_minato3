@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
-using System.Drawing;
 
 namespace Campo_minato3
 {
