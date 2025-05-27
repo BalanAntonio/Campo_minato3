@@ -233,12 +233,10 @@ namespace Campo_minato3
             }
         }
 
-        public void IndicaCelleVuote(int xIn, int yIn)
+        public void IndicaCelleVuote(int xIn, int yIn) // flood fill
         {
             if(controlloBordi(xIn, yIn))
             {
-                
-
                 if (campo[xIn, yIn] == 0)
                 {
                     BlocchiScoperti++;
