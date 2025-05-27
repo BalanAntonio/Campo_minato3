@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+using System.IO;
 
 namespace Campo_minato3
 {
@@ -20,6 +22,7 @@ namespace Campo_minato3
 
         System.Windows.Forms.Timer cronometro;
         int secondi = 0;
+        int migliorTempo; // per il miglior tempo, viene letto dal file PunteggioMax.csv
 
         int lughezzaLato;
         int altezzaLato = 1;
@@ -71,12 +74,12 @@ namespace Campo_minato3
         {
             InitializeComponent();
 
-            inizio("Benvenuto al prato fiorito");
+            inizio("Benvenuto al prato fiorito", "--");
         }
 
-        public void inizio(string messaggio)
+        public void inizio(string messaggio, string punteggio)
         {
-            if (PrendiDifficolta(messaggio))
+            if (PrendiDifficolta(messaggio, punteggio))
             {
                 chiudiForm = true;
                 this.Close(); // chiude Form1
@@ -176,15 +179,16 @@ namespace Campo_minato3
             pnl_titolo.Location = new Point((this.ClientSize.Width - pnl_titolo.Width) / 2, 10); // centra il pannello del titolo nella finestra
         }
 
-        public bool PrendiDifficolta(string messaggio)
+        public bool PrendiDifficolta(string messaggio, string punteggio)
         {
-            finestra_iniziale finestra = new finestra_iniziale(messaggio);
+            finestra_iniziale finestra = new finestra_iniziale(messaggio, punteggio);
 
             if (finestra.ShowDialog() == DialogResult.OK)
             {
                 lughezzaLato = finestra.lunghezza_latoIn; // prendi il numero di celle per lato
                 altezzaLato = finestra.altezza_latoIn;
                 Nmine = finestra.NmineIn; // prendi il numero di mine
+                migliorTempo = finestra.migliorPunteggioPubblico;
 
                 campo = new int[lughezzaLato, altezzaLato]; // crea il campo di gioco
                 mine = new Cmina[Nmine]; // crea l'array delle mine
@@ -403,7 +407,7 @@ namespace Campo_minato3
             cronometro.Stop();
 
             // ricomincia da capo
-            inizio("Hai perso!!!");
+            inizio("Hai perso!!!", "--");
         }
         
         public int contaBandiereAdiacenti(int xIn, int yIn)
@@ -500,12 +504,33 @@ namespace Campo_minato3
             {
                 cronometro.Stop();
                 souni[4].Play();
-                inizio("Hai vinto!!!");
+
+                migliorPunteggio();
+
+                inizio("Hai vinto!!!", $"{secondi}");
                 return true;
             }
 
             return false;
 
+        }
+
+        public void migliorPunteggio()
+        {
+            if (migliorTempo > secondi)
+            {
+                try // permette di far andare avanti il programma anche se si trova un errore
+                {
+                    using (StreamWriter sw = new StreamWriter(@"tempoMin.csv")) // apre il file
+                    {
+                        sw.WriteLine($"{secondi}"); // sovrascrive il punteggio
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("errore");
+                }
+            }
         }
 
         private void lbl_titolo_Click(object sender, EventArgs e)
