@@ -509,39 +509,6 @@ namespace Campo_minato3
 
         }
 
-        private void lbl_titolo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl_nMineTitolo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl_nMine_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnl_titolo_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void lbl_tempoTitolo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl_tempo_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
