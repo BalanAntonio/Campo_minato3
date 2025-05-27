@@ -55,12 +55,12 @@ namespace Campo_minato3
         {
             InitializeComponent();
 
-            inizio();
+            inizio("Benvenuto al prato fiorito");
         }
 
-        public void inizio()
+        public void inizio(string messaggio)
         {
-            if (PrendiDifficolta())
+            if (PrendiDifficolta(messaggio))
             {
                 chiudiForm = true;
                 this.Close(); // chiude Form1
@@ -143,9 +143,9 @@ namespace Campo_minato3
             pnl_titolo.Location = new Point((this.ClientSize.Width - pnl_titolo.Width) / 2, 10); // centra il pannello del titolo nella finestra
         }
 
-        public bool PrendiDifficolta()
+        public bool PrendiDifficolta(string messaggio)
         {
-            finestra_iniziale finestra = new finestra_iniziale();
+            finestra_iniziale finestra = new finestra_iniziale(messaggio);
 
             if (finestra.ShowDialog() == DialogResult.OK)
             {
@@ -342,7 +342,7 @@ namespace Campo_minato3
             return 0;
         }
 
-        public void finePartita()
+        public void finePartitaPersa()
         {
             foreach (var parametro in mine)
             {
@@ -364,11 +364,8 @@ namespace Campo_minato3
 
             partitaPersa = true;
 
-            MessageBox.Show("Hai perso!"); // mostra il messaggio di fine partita
-
-
             // ricomincia da capo
-            inizio();
+            inizio("Hai perso!!!");
         }
         
         public int contaBandiereAdiacenti(int xIn, int yIn)
@@ -449,7 +446,7 @@ namespace Campo_minato3
                 }
                 else if (campo[Posx, Posy] == -1)
                 {
-                    finePartita(); // partita persa
+                    finePartitaPersa(); // partita persa
                     return true;
                 }
                 else
@@ -462,8 +459,7 @@ namespace Campo_minato3
 
             if (BlocchiScoperti == lughezzaLato * altezzaLato - Nmine)
             {
-                MessageBox.Show("Hai vinto!");
-                inizio();
+                inizio("Hai vinto!!!");
                 return true;
             }
 
