@@ -17,9 +17,12 @@ namespace Campo_minato3
         public int altezza_latoIn { get; set; }
         public int NmineIn { get; set; }
 
-        public finestra_iniziale()
+        public finestra_iniziale(string messaggio)
         {
             InitializeComponent();
+
+            lbl_titolo.Text = messaggio;
+            lbl_titolo.Location = new Point((this.ClientSize.Width - lbl_titolo.Width) / 2, lbl_titolo.Location.Y); // Centra il titolo
 
             cmb_difficolta.Items.Add("Facile");
             cmb_difficolta.Items.Add("Medio");
