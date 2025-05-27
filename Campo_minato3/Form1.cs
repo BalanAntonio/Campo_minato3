@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Campo_minato3
 {
@@ -32,7 +33,17 @@ namespace Campo_minato3
 
         int BlocchiScoperti = 0;
 
-         Color[] coloriNumeri = new Color[]
+        SoundPlayer[] souni = new SoundPlayer[] {
+            new SoundPlayer(@"perso.wav"),
+            new SoundPlayer(@"click_bandiera.wav"),
+            new SoundPlayer(@"click_doppio.wav"),
+            new SoundPlayer(@"click_normale.wav"),
+            new SoundPlayer(@"vittoria.wav")
+
+        };
+        
+
+        Color[] coloriNumeri = new Color[]
         {
             Color.FromArgb(0, 0, 255),       // 1 - Blu
             Color.FromArgb(0, 128, 0),       // 2 - Verde
@@ -299,6 +310,7 @@ namespace Campo_minato3
 
             if (e.Button == MouseButtons.Right)// CLICK DESTRO PER BANDIERE
             {
+
                 if (campo[colonna, riga] == -1) // se c'e la mina dove hai fatto click destro
                 {
                     Nbandiere += ControlloBandiere(riga, colonna, true);
