@@ -12,10 +12,31 @@ namespace Campo_minato3
 {
     public partial class finestra_iniziale : Form
     {
-
         public int lunghezza_latoIn { get; set; }
         public int altezza_latoIn { get; set; }
         public int NmineIn { get; set; }
+        public CTema tema { get; set; }
+
+        // LISTA DI TUTTI I TEMI DEL GIOCO
+
+
+        Color[] coloriDefault = new Color[]
+        {
+            Color.FromArgb(0, 0, 255),       // 1 - Blu
+            Color.FromArgb(0, 128, 0),       // 2 - Verde
+            Color.FromArgb(255, 0, 0),       // 3 - Rosso
+            Color.FromArgb(0, 0, 139),       // 4 - Blu scuro
+            Color.FromArgb(139, 69, 19),     // 5 - Marrone scuro
+            Color.FromArgb(72, 209, 204),    // 6 - Ciano scuro
+            Color.FromArgb(0, 0, 0),         // 7 - Nero
+            Color.FromArgb(105, 105, 105)    // 8 - Grigio scuro
+        };
+
+
+        CTema[] temi = new CTema[]
+        {
+
+        };
 
         public finestra_iniziale(string messaggio)
         {

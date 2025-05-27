@@ -42,7 +42,8 @@ namespace Campo_minato3
             new SoundPlayer(Properties.Resources.vittoria)
 
         };
-        
+
+        CTema tema;
 
         Color[] coloriNumeri = new Color[]
         {
@@ -169,7 +170,7 @@ namespace Campo_minato3
                 mine = new Cmina[Nmine]; // crea l'array delle mine
 
                 lbl_nMine.Text = $"{Nmine}"; // mostra il numero di mine nella label
-
+                tema = finestra.tema;
                 return false;
             }
 

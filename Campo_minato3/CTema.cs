@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Campo_minato3
 {
-    internal class CTema
+    public class CTema
     {
         Color[] defaultC = new Color[]
         {
@@ -20,6 +20,7 @@ namespace Campo_minato3
             Color.FromArgb(0, 0, 0),         // 7 - Nero
             Color.FromArgb(105, 105, 105)    // 8 - Grigio scuro
         };
+
         
         public Font font { get; set; }
         public Color[] colori { get; set; }
