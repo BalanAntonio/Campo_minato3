@@ -477,8 +477,6 @@ namespace Campo_minato3
             if (BlocchiScoperti == lughezzaLato * altezzaLato - Nmine)
             {
                 souni[4].Play();
-                MessageBox.Show("Hai vinto!");
-                inizio();
                 inizio("Hai vinto!!!");
                 return true;
             }
