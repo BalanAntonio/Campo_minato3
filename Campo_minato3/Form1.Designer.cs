@@ -35,8 +35,8 @@
             this.lbl_nMineTitolo = new System.Windows.Forms.Label();
             this.lbl_nMine = new System.Windows.Forms.Label();
             this.pnl_titolo = new System.Windows.Forms.Panel();
-            this.lbl_tempoTitolo = new System.Windows.Forms.Label();
             this.lbl_tempo = new System.Windows.Forms.Label();
+            this.lbl_tempoTitolo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_campo)).BeginInit();
             this.pnl_titolo.SuspendLayout();
             this.SuspendLayout();
@@ -98,17 +98,6 @@
             this.pnl_titolo.TabIndex = 4;
             this.pnl_titolo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_titolo_Paint);
             // 
-            // lbl_tempoTitolo
-            // 
-            this.lbl_tempoTitolo.AutoSize = true;
-            this.lbl_tempoTitolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_tempoTitolo.Location = new System.Drawing.Point(14, 63);
-            this.lbl_tempoTitolo.Name = "lbl_tempoTitolo";
-            this.lbl_tempoTitolo.Size = new System.Drawing.Size(165, 24);
-            this.lbl_tempoTitolo.TabIndex = 4;
-            this.lbl_tempoTitolo.Text = "tempo trascorso:";
-            this.lbl_tempoTitolo.Click += new System.EventHandler(this.lbl_tempoTitolo_Click);
-            // 
             // lbl_tempo
             // 
             this.lbl_tempo.AutoSize = true;
@@ -119,6 +108,17 @@
             this.lbl_tempo.TabIndex = 5;
             this.lbl_tempo.Text = "--";
             this.lbl_tempo.Click += new System.EventHandler(this.lbl_tempo_Click);
+            // 
+            // lbl_tempoTitolo
+            // 
+            this.lbl_tempoTitolo.AutoSize = true;
+            this.lbl_tempoTitolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_tempoTitolo.Location = new System.Drawing.Point(14, 63);
+            this.lbl_tempoTitolo.Name = "lbl_tempoTitolo";
+            this.lbl_tempoTitolo.Size = new System.Drawing.Size(165, 24);
+            this.lbl_tempoTitolo.TabIndex = 4;
+            this.lbl_tempoTitolo.Text = "tempo trascorso:";
+            this.lbl_tempoTitolo.Click += new System.EventHandler(this.lbl_tempoTitolo_Click);
             // 
             // Form1
             // 
