@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Campo_minato3
 {
@@ -32,7 +33,17 @@ namespace Campo_minato3
 
         int BlocchiScoperti = 0;
 
-         Color[] coloriNumeri = new Color[]
+        SoundPlayer[] souni = new SoundPlayer[] {
+            new SoundPlayer(@"perso.wav"),
+            new SoundPlayer(@"click_bandiera.wav"),
+            new SoundPlayer(@"click_doppio.wav"),
+            new SoundPlayer(@"click_normale.wav"),
+            new SoundPlayer(@"vittoria.wav")
+
+        };
+        
+
+        Color[] coloriNumeri = new Color[]
         {
             Color.FromArgb(0, 0, 255),       // 1 - Blu
             Color.FromArgb(0, 128, 0),       // 2 - Verde
@@ -299,12 +310,15 @@ namespace Campo_minato3
 
             if (e.Button == MouseButtons.Right)// CLICK DESTRO PER BANDIERE
             {
+
                 if (campo[colonna, riga] == -1) // se c'e la mina dove hai fatto click destro
                 {
+                    souni[1].Play();
                     Nbandiere += ControlloBandiere(riga, colonna, true);
                 }
                 else if ((campo[colonna, riga] >= 0 && campo[colonna, riga] <= 8) || campo[colonna, riga] < -1)
                 {
+                    souni[1].Play();
                     Nbandiere += ControlloBandiere(riga, colonna, false);
                 }
                 lbl_nMine.Text = $"{Nmine - Nbandiere}"; // aggiorna il numero di mine rimaste
@@ -318,7 +332,7 @@ namespace Campo_minato3
             {
                 return;
             }
-
+            souni[3].Play();
             cellaCliccata(colonna, riga);
         }
 
@@ -405,6 +419,7 @@ namespace Campo_minato3
 
             if (campo[colonna, riga] >= 11 && campo[colonna, riga] <= 18 && contaBandiereAdiacenti(colonna,riga) == campo[colonna, riga] - 10)
             {
+                souni[2].Play();
                 for (int y = -1; y <= 1; y++)
                 {
                     for (int x = -1; x <= 1; x++)
@@ -459,6 +474,9 @@ namespace Campo_minato3
 
             if (BlocchiScoperti == lughezzaLato * altezzaLato - Nmine)
             {
+                souni[4].Play();
+                MessageBox.Show("Hai vinto!");
+                inizio();
                 inizio("Hai vinto!!!");
                 return true;
             }
@@ -489,7 +507,7 @@ namespace Campo_minato3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            //aa
         }
     }
 }
