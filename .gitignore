@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Eccezioni per includere i file nella cartella bin/Debug/media/
+!bin/
+!bin/Debug/
+!bin/Debug/**
