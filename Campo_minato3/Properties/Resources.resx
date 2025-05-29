@@ -118,19 +118,5 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="click_bandiera" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\click_bandiera.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="click_doppio" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\click_doppio.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="click_normale" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\click_normale.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="perso" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\perso.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="vittoria" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\vittoria.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+  
 </root>

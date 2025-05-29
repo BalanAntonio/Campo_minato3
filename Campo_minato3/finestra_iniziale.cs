@@ -5,10 +5,11 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Media;
 
 namespace Campo_minato3
 {
@@ -26,6 +27,7 @@ namespace Campo_minato3
             }
         }
         public CTema tema { get; set; }
+        List<CTema> temiPrivati = new List<CTema>();
 
         //
         // LISTA DI TUTTI I TEMI DEL GIOCO
@@ -49,14 +51,13 @@ namespace Campo_minato3
             ColorTranslator.FromHtml("#000000")  // colore default
         };
         Font fontnatale = new Font("Algerian", 14, FontStyle.Bold);
-        CTema natale;
 
         SoundPlayer[] suoniNatale = new SoundPlayer[] {
-            new SoundPlayer(Properties.Resources.perso),            // PERSO
-            new SoundPlayer(Properties.Resources.click_bandiera),   // CLICK BANDIERA
-            new SoundPlayer(Properties.Resources.click_doppio),     // CLICK DOPPIO
-            new SoundPlayer(Properties.Resources.vittoria),    // CLICK NORMALE
-            new SoundPlayer(Properties.Resources.vittoria)          // VITTORIA
+            new SoundPlayer("media/perso.wav"),            // PERSO
+            new SoundPlayer("media/click_bandiera.wav"),   // CLICK BANDIERA
+            new SoundPlayer("media/click_doppio.wav"),     // CLICK DOPPIO
+            new SoundPlayer("media/click_normale.wav"),    // CLICK NORMALE
+            new SoundPlayer("media/vittoria.wav")          // VITTORIA
             // INSERIRE MUSICA COME ULTIMO 
         };
 
@@ -79,18 +80,15 @@ namespace Campo_minato3
         };
 
         SoundPlayer[] souniDefault = new SoundPlayer[] {
-            new SoundPlayer(Properties.Resources.perso),            // PERSO
-            new SoundPlayer(Properties.Resources.click_bandiera),   // CLICK BANDIERA
-            new SoundPlayer(Properties.Resources.click_doppio),     // CLICK DOPPIO
-            new SoundPlayer(Properties.Resources.click_normale),    // CLICK NORMALE
-            new SoundPlayer(Properties.Resources.vittoria)          // VITTORIA
+            new SoundPlayer("media/perso.wav"),            // PERSO
+            new SoundPlayer("media/click_bandiera.wav"),   // CLICK BANDIERA
+            new SoundPlayer("media/click_doppio.wav"),     // CLICK DOPPIO
+            new SoundPlayer("media/click_normale.wav"),    // CLICK NORMALE
+            new SoundPlayer("media/vittoria.wav")          // VITTORIA
             // INSERIRE MUSICA COME ULTIMO 
         };
 
         Font fontdefault = new Font("Arial", 14, FontStyle.Bold);
-        CTema Classico;
-
-        CTema[] temi;
 
         public finestra_iniziale(string messaggio, string punteggio)
         {
@@ -104,14 +102,14 @@ namespace Campo_minato3
 
             migliorTempo();
 
+            leggiTemi();
+
             cmb_difficolta.Items.Add("Facile");
             cmb_difficolta.Items.Add("Medio");
             cmb_difficolta.Items.Add("Difficile");
 
             cmb_difficolta.SelectedIndex = 0;
 
-            cmb_tema.Items.Add("Classico");
-            cmb_tema.Items.Add("Natale");
 
             cmb_tema.SelectedIndex = 0;
         }
@@ -129,6 +127,84 @@ namespace Campo_minato3
                     {
                         lbl_migliorTempo.Text = $"{migliorPunteggioPrivato} s";  // il miglior punteggio viene scritto nel form
                     }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("errore");
+            }
+        }
+
+        public void leggiTemi()
+        {
+
+            try // permette di far andare avanti il programma anche se si trova un errore
+            {
+                bool inizio = true; // variabile per verificare se è la prima riga del file
+                using (StreamReader sr = new StreamReader(@"temi.csv")) // apre il file
+                {
+                    string riga;
+
+                    while (!sr.EndOfStream)
+                    {
+                        riga = sr.ReadLine(); // legge la riga
+
+                        if (inizio) // se non è la prima riga
+                        {
+                            riga = sr.ReadLine(); // legge la riga successiva
+                            inizio = false; // non è più la prima riga
+                        }
+
+
+                        if (riga != null) // se la riga non è vuota
+                        {
+                            string[] campi = riga.Split(';'); // divide la riga in base al carattere ';'
+
+                            if (campi.Length == 6)
+                            {
+                                // prende i colori
+                                string[] coloreStringhe = campi[4].Split(',');
+                                Color[] colori = coloreStringhe.Select(c => ColorTranslator.FromHtml(c)).ToArray();
+                                // come fare:
+                                // Color[] colori = new Color[coloreStringhe.Length];
+                                // for (int i = 0; i < coloreStringhe.Length; i++)
+                                // {
+                                //     colori[i] = ColorTranslator.FromHtml(coloreStringhe[i]);
+                                // }
+
+
+                                // prende i suoni
+                                string[] suonoStringhe = campi[5].Split(',');
+                                SoundPlayer[] suoni = suonoStringhe.Select(nomeFile =>
+                                    new SoundPlayer($"media/{nomeFile}") // path relativo o assoluto a tua scelta
+                                ).ToArray();
+                                //string[] suonoStringhe = campi[5].Split(',');
+                                //SoundPlayer[] suoni = new SoundPlayer[suonoStringhe.Length];
+                                //for (int i = 0; i < suonoStringhe.Length; i++)
+                                //{
+                                //    suoni[i] = prendeSuono(suonoStringhe[i].Trim()); // chiama la funzione prendeSuono per ogni suono
+                                //}
+
+
+                                // prende il font
+                                string[] partiFont = campi[3].Split(',');
+
+                                string nomeFont = partiFont[0];
+                                float grandezzaFont = float.Parse(partiFont[1]);
+                                FontStyle stile = FontStyle.Regular;
+                                if (Enum.TryParse(partiFont[2], true, out FontStyle parsedStyle))
+                                {
+                                    stile = parsedStyle;
+                                }
+
+                                Font font = new Font(nomeFont, grandezzaFont, stile);
+
+                                temiPrivati.Add(new CTema(campi[0], font, colori, campi[1], campi[2], suoni));
+                                cmb_tema.Items.Add(campi[0]);
+                            }
+                        }
+                    }
+
                 }
             }
             catch
@@ -161,8 +237,6 @@ namespace Campo_minato3
                 NmineIn = 99;
             }
 
-            tema = temi[cmb_tema.SelectedIndex];
-
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -189,15 +263,7 @@ namespace Campo_minato3
 
         private void finestra_iniziale_Load(object sender, EventArgs e)
         {
-            natale = new CTema(fontnatale, ColoriNatale, "🍬", "🎄",suoniNatale);
-            Classico = new CTema(fontdefault, ColoriDefault, "💣", "🏴",souniDefault);
 
-            // LISTA DI TUTTI I TEMI
-            temi = new CTema[]
-            {
-                Classico,
-                natale
-            };
         }
 
         private void lbl_titolo_Click(object sender, EventArgs e)

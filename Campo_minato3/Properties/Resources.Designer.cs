@@ -59,50 +59,5 @@ namespace Campo_minato3.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Cerca una risorsa localizzata di tipo System.IO.UnmanagedMemoryStream simile a System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream click_bandiera {
-            get {
-                return ResourceManager.GetStream("click_bandiera", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Cerca una risorsa localizzata di tipo System.IO.UnmanagedMemoryStream simile a System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream click_doppio {
-            get {
-                return ResourceManager.GetStream("click_doppio", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Cerca una risorsa localizzata di tipo System.IO.UnmanagedMemoryStream simile a System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream click_normale {
-            get {
-                return ResourceManager.GetStream("click_normale", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Cerca una risorsa localizzata di tipo System.IO.UnmanagedMemoryStream simile a System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream perso {
-            get {
-                return ResourceManager.GetStream("perso", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Cerca una risorsa localizzata di tipo System.IO.UnmanagedMemoryStream simile a System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream vittoria {
-            get {
-                return ResourceManager.GetStream("vittoria", resourceCulture);
-            }
-        }
     }
 }

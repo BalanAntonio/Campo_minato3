@@ -42,8 +42,9 @@ namespace Campo_minato3
             bandiera = "🚩";
         }
 
-        public CTema(Font font, Color[] colori, string bomba, string bandiera, SoundPlayer[] suoni)
+        public CTema( string nomeTema, Font font, Color[] colori, string bomba, string bandiera, SoundPlayer[] suoni)
         {
+            this.nomeTema = nomeTema;
             this.font = font;
             this.colori = colori;
             this.bomba = bomba;
