@@ -54,7 +54,7 @@ namespace Campo_minato3
             lbl_titolo.Text = messaggio;
             lbl_titolo.Location = new Point((this.ClientSize.Width - lbl_titolo.Width) / 2, lbl_titolo.Location.Y); // Centra il titolo
 
-            lbl_tempoCorrente.Text = punteggio;
+            lbl_tempoCorrente.Text = $"{punteggio} s";
 
 
             migliorTempo();
@@ -77,7 +77,7 @@ namespace Campo_minato3
 
                     if (int.TryParse(riga, out migliorPunteggioPrivato)) // cerca di trasformarlo in intero e se ci riesce assegna il valore a migliorPunteggio
                     {
-                        lbl_migliorTempo.Text = $"{migliorPunteggioPrivato}";  // il miglior punteggio viene scritto nel form
+                        lbl_migliorTempo.Text = $"{migliorPunteggioPrivato} s";  // il miglior punteggio viene scritto nel form
                     }
                 }
             }
@@ -131,7 +131,7 @@ namespace Campo_minato3
                 MessageBox.Show("errore");
             }
 
-            lbl_migliorTempo.Text = $"{migliorPunteggioPrivato}";  // il punteggio viene scritto nel form
+            lbl_migliorTempo.Text = $"{migliorPunteggioPrivato}  s";  // il punteggio viene scritto nel form
         }
 
         private void finestra_iniziale_Load(object sender, EventArgs e)
