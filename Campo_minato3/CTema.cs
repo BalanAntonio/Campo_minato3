@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Media;
 
 namespace Campo_minato3
 {
@@ -26,13 +27,15 @@ namespace Campo_minato3
         public Color[] colori { get; set; }
         public string bomba { get; set; }
         public string bandiera { get; set; }
+        public SoundPlayer[] Suoni { get; set; }
 
-        public CTema(Font font, Color[] colori, string bomba, string bandiera)
+        public CTema(Font font, Color[] colori, string bomba, string bandiera, SoundPlayer[] suoni)
         {
             this.font = font;
             this.colori = colori;
             this.bomba = bomba;
             this.bandiera = bandiera;
+            this.Suoni = suoni;
         }
 
         public CTema()

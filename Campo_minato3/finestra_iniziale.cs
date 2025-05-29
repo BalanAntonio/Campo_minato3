@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Campo_minato3
 {
@@ -66,6 +67,14 @@ namespace Campo_minato3
             ColorTranslator.FromHtml("#F0F0F0"), // cella scoperta
             ColorTranslator.FromHtml("#FF1428"), // cella perdita
             ColorTranslator.FromHtml("#000000")  // colore default
+        };
+
+        SoundPlayer[] souniDefault = new SoundPlayer[] {
+            new SoundPlayer(Properties.Resources.perso),
+            new SoundPlayer(Properties.Resources.click_bandiera),
+            new SoundPlayer(Properties.Resources.click_doppio),
+            new SoundPlayer(Properties.Resources.click_normale),
+            new SoundPlayer(Properties.Resources.vittoria)
         };
 
         Font fontdefault = new Font("Arial", 14, FontStyle.Bold);
@@ -170,8 +179,8 @@ namespace Campo_minato3
 
         private void finestra_iniziale_Load(object sender, EventArgs e)
         {
-            natale = new CTema(fontnatale, ColoriNatale, "🍬", "🎄");
-            Classico = new CTema(fontdefault, ColoriDefault, "💣", "🏴");
+            natale = new CTema(fontnatale, ColoriNatale, "🍬", "🎄",souniDefault);
+            Classico = new CTema(fontdefault, ColoriDefault, "💣", "🏴",souniDefault);
 
             // LISTA DI TUTTI I TEMI
             temi = new CTema[]
