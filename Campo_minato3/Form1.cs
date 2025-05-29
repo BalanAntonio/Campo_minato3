@@ -402,7 +402,7 @@ namespace Campo_minato3
             }
 
             partitaPersa = true;
-
+            souni[0].Play();
             cronometro.Stop();
 
             // ricomincia da capo
