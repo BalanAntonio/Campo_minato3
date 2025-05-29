@@ -29,67 +29,6 @@ namespace Campo_minato3
         public CTema tema { get; set; }
         List<CTema> temiPrivati = new List<CTema>();
 
-        //
-        // LISTA DI TUTTI I TEMI DEL GIOCO
-        //
-
-        // NATALE
-
-        Color[] ColoriNatale = new Color[]
-        {
-            ColorTranslator.FromHtml("#0000FF"), // 1 - blu
-            ColorTranslator.FromHtml("#008000"), // 2 - verde
-            ColorTranslator.FromHtml("#FF0000"), // 3 - rosso
-            ColorTranslator.FromHtml("#00008B"), // 4 - blu scuro
-            ColorTranslator.FromHtml("#8B4513"), // 5 - marrone scuro
-            ColorTranslator.FromHtml("#48D1CC"), // 6 - ciano scuro
-            ColorTranslator.FromHtml("#000000"), // 7 - nero
-            ColorTranslator.FromHtml("#696969"), // 8 - brigio scuro
-            ColorTranslator.FromHtml("#FF4646"), // cella non scoperta
-            ColorTranslator.FromHtml("#C8FFC8"), // cella scoperta
-            ColorTranslator.FromHtml("#3232FF"), // cella perdita
-            ColorTranslator.FromHtml("#000000")  // colore default
-        };
-        Font fontnatale = new Font("Algerian", 14, FontStyle.Bold);
-
-        SoundPlayer[] suoniNatale = new SoundPlayer[] {
-            new SoundPlayer("media/perso.wav"),            // PERSO
-            new SoundPlayer("media/click_bandiera.wav"),   // CLICK BANDIERA
-            new SoundPlayer("media/click_doppio.wav"),     // CLICK DOPPIO
-            new SoundPlayer("media/click_normale.wav"),    // CLICK NORMALE
-            new SoundPlayer("media/vittoria.wav")          // VITTORIA
-            // INSERIRE MUSICA COME ULTIMO 
-        };
-
-        // DEFAULT
-
-        Color[] ColoriDefault = new Color[]
-        {
-            ColorTranslator.FromHtml("#0000FF"), // 1 - blu
-            ColorTranslator.FromHtml("#008000"), // 2 - verde
-            ColorTranslator.FromHtml("#FF0000"), // 3 - rosso
-            ColorTranslator.FromHtml("#00008B"), // 4 - blu scuro
-            ColorTranslator.FromHtml("#8B4513"), // 5 - marrone scuro
-            ColorTranslator.FromHtml("#48D1CC"), // 6 - ciano scuro
-            ColorTranslator.FromHtml("#000000"), // 7 - nero
-            ColorTranslator.FromHtml("#696969"), // 8 - grigio scuro
-            ColorTranslator.FromHtml("#AAAAAA"), // cella non scoperta
-            ColorTranslator.FromHtml("#F0F0F0"), // cella scoperta
-            ColorTranslator.FromHtml("#FF1428"), // cella perdita
-            ColorTranslator.FromHtml("#000000")  // colore default
-        };
-
-        SoundPlayer[] souniDefault = new SoundPlayer[] {
-            new SoundPlayer("media/perso.wav"),            // PERSO
-            new SoundPlayer("media/click_bandiera.wav"),   // CLICK BANDIERA
-            new SoundPlayer("media/click_doppio.wav"),     // CLICK DOPPIO
-            new SoundPlayer("media/click_normale.wav"),    // CLICK NORMALE
-            new SoundPlayer("media/vittoria.wav")          // VITTORIA
-            // INSERIRE MUSICA COME ULTIMO 
-        };
-
-        Font fontdefault = new Font("Arial", 14, FontStyle.Bold);
-
         public finestra_iniziale(string messaggio, string punteggio)
         {
             InitializeComponent();
@@ -238,6 +177,8 @@ namespace Campo_minato3
             }
 
             DialogResult = DialogResult.OK;
+
+            tema = temiPrivati[nTema]; // assegna il tema selezionato alla variabile tema
             Close();
         }
 

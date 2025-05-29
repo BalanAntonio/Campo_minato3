@@ -76,7 +76,7 @@
             // 
             this.lbl_nMine.AutoSize = true;
             this.lbl_nMine.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_nMine.Location = new System.Drawing.Point(195, 39);
+            this.lbl_nMine.Location = new System.Drawing.Point(172, 39);
             this.lbl_nMine.Name = "lbl_nMine";
             this.lbl_nMine.Size = new System.Drawing.Size(24, 24);
             this.lbl_nMine.TabIndex = 3;
@@ -98,7 +98,7 @@
             // 
             this.lbl_tempo.AutoSize = true;
             this.lbl_tempo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_tempo.Location = new System.Drawing.Point(195, 63);
+            this.lbl_tempo.Location = new System.Drawing.Point(172, 63);
             this.lbl_tempo.Name = "lbl_tempo";
             this.lbl_tempo.Size = new System.Drawing.Size(24, 24);
             this.lbl_tempo.TabIndex = 5;
