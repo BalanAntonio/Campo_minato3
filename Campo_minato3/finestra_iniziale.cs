@@ -51,6 +51,15 @@ namespace Campo_minato3
         Font fontnatale = new Font("Algerian", 14, FontStyle.Bold);
         CTema natale;
 
+        SoundPlayer[] suoniNatale = new SoundPlayer[] {
+            new SoundPlayer(Properties.Resources.perso),            // PERSO
+            new SoundPlayer(Properties.Resources.click_bandiera),   // CLICK BANDIERA
+            new SoundPlayer(Properties.Resources.click_doppio),     // CLICK DOPPIO
+            new SoundPlayer(Properties.Resources.vittoria),    // CLICK NORMALE
+            new SoundPlayer(Properties.Resources.vittoria)          // VITTORIA
+            // INSERIRE MUSICA COME ULTIMO 
+        };
+
         // DEFAULT
 
         Color[] ColoriDefault = new Color[]
@@ -70,11 +79,12 @@ namespace Campo_minato3
         };
 
         SoundPlayer[] souniDefault = new SoundPlayer[] {
-            new SoundPlayer(Properties.Resources.perso),
-            new SoundPlayer(Properties.Resources.click_bandiera),
-            new SoundPlayer(Properties.Resources.click_doppio),
-            new SoundPlayer(Properties.Resources.click_normale),
-            new SoundPlayer(Properties.Resources.vittoria)
+            new SoundPlayer(Properties.Resources.perso),            // PERSO
+            new SoundPlayer(Properties.Resources.click_bandiera),   // CLICK BANDIERA
+            new SoundPlayer(Properties.Resources.click_doppio),     // CLICK DOPPIO
+            new SoundPlayer(Properties.Resources.click_normale),    // CLICK NORMALE
+            new SoundPlayer(Properties.Resources.vittoria)          // VITTORIA
+            // INSERIRE MUSICA COME ULTIMO 
         };
 
         Font fontdefault = new Font("Arial", 14, FontStyle.Bold);
@@ -179,7 +189,7 @@ namespace Campo_minato3
 
         private void finestra_iniziale_Load(object sender, EventArgs e)
         {
-            natale = new CTema(fontnatale, ColoriNatale, "🍬", "🎄",souniDefault);
+            natale = new CTema(fontnatale, ColoriNatale, "🍬", "🎄",suoniNatale);
             Classico = new CTema(fontdefault, ColoriDefault, "💣", "🏴",souniDefault);
 
             // LISTA DI TUTTI I TEMI
