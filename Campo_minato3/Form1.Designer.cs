@@ -124,6 +124,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Campo minato";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtg_campo)).EndInit();
             this.pnl_titolo.ResumeLayout(false);
             this.pnl_titolo.PerformLayout();
