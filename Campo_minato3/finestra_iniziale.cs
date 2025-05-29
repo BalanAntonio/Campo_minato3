@@ -26,10 +26,13 @@ namespace Campo_minato3
         }
         public CTema tema { get; set; }
 
+        //
         // LISTA DI TUTTI I TEMI DEL GIOCO
+        //
 
+        // NATALE
 
-        Color[] coloriDefault = new Color[]
+        Color[] ColoriNatale = new Color[]
         {
             Color.FromArgb(0, 0, 255),       // 1 - Blu
             Color.FromArgb(0, 128, 0),       // 2 - Verde
@@ -38,14 +41,36 @@ namespace Campo_minato3
             Color.FromArgb(139, 69, 19),     // 5 - Marrone scuro
             Color.FromArgb(72, 209, 204),    // 6 - Ciano scuro
             Color.FromArgb(0, 0, 0),         // 7 - Nero
-            Color.FromArgb(105, 105, 105)    // 8 - Grigio scuro
+            Color.FromArgb(105, 105, 105),   // 8 - Grigio scuro
+            Color.FromArgb(255,70,70),       // Cella non scoperta
+            Color.FromArgb(200,255,200),     // Cella scoperta
+            Color.FromArgb(50,50,255),       // Cella perdita
+            Color.FromArgb(0,0,0)            // Colore default
         };
+        Font fontnatale = new Font("Algerian", 14, FontStyle.Bold);
+        CTema natale;
 
+        // DEFAULT
 
-        CTema[] temi = new CTema[]
+        Color[] ColoriDefault = new Color[]
         {
-
+            Color.FromArgb(0, 0, 255),       // 1 - Blu
+            Color.FromArgb(0, 128, 0),       // 2 - Verde
+            Color.FromArgb(255, 0, 0),       // 3 - Rosso
+            Color.FromArgb(0, 0, 139),       // 4 - Blu scuro
+            Color.FromArgb(139, 69, 19),     // 5 - Marrone scuro
+            Color.FromArgb(72, 209, 204),    // 6 - Ciano scuro
+            Color.FromArgb(0, 0, 0),         // 7 - Nero
+            Color.FromArgb(105, 105, 105),   // 8 - Grigio scuro
+            Color.FromArgb(170,170,170),     // Cella non scoperta
+            Color.FromArgb(240,240,240),     // Cella scoperta
+            Color.FromArgb(255,20,40),       // Cella perdita
+            Color.FromArgb(0,0,0)            // Colore default
         };
+        Font fontdefault = new Font("Arial", 14, FontStyle.Bold);
+        CTema Classico;
+
+        CTema[] temi;
 
         public finestra_iniziale(string messaggio, string punteggio)
         {
@@ -64,6 +89,11 @@ namespace Campo_minato3
             cmb_difficolta.Items.Add("Difficile");
 
             cmb_difficolta.SelectedIndex = 0;
+
+            cmb_tema.Items.Add("Classico");
+            cmb_tema.Items.Add("Natale");
+
+            cmb_tema.SelectedIndex = 0;
         }
 
         public void migliorTempo()
@@ -90,6 +120,7 @@ namespace Campo_minato3
         private void btn_inserisci_Click(object sender, EventArgs e)
         {
             string difficolta = cmb_difficolta.SelectedItem.ToString().ToLower();
+            int nTema = cmb_tema.SelectedIndex;
 
             if (difficolta == "facile")
             {
@@ -109,6 +140,8 @@ namespace Campo_minato3
                 altezza_latoIn = 16;
                 NmineIn = 99;
             }
+
+            tema = temi[cmb_tema.SelectedIndex];
 
             DialogResult = DialogResult.OK;
             Close();
@@ -136,7 +169,15 @@ namespace Campo_minato3
 
         private void finestra_iniziale_Load(object sender, EventArgs e)
         {
+            natale = new CTema(fontnatale, ColoriNatale, "🍬", "🎄");
+            Classico = new CTema(fontdefault, ColoriDefault, "💣", "🏴");
 
+            // LISTA DI TUTTI I TEMI
+            temi = new CTema[]
+            {
+                Classico,
+                natale
+            };
         }
 
         private void lbl_titolo_Click(object sender, EventArgs e)
