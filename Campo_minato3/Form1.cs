@@ -41,14 +41,7 @@ namespace Campo_minato3
 
         int BlocchiScoperti = 0;
 
-        SoundPlayer[] souni = new SoundPlayer[] {
-            new SoundPlayer(Properties.Resources.perso),
-            new SoundPlayer(Properties.Resources.click_bandiera),
-            new SoundPlayer(Properties.Resources.click_doppio),
-            new SoundPlayer(Properties.Resources.click_normale),
-            new SoundPlayer(Properties.Resources.vittoria)
-
-        };
+        SoundPlayer[] souni;
 
         CTema tema;
 
@@ -200,6 +193,7 @@ namespace Campo_minato3
 
                 lbl_nMine.Text = $"{Nmine}"; // mostra il numero di mine nella label
                 tema = finestra.tema;
+                souni = tema.Suoni;
                 return false;
             }
 
