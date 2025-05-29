@@ -34,18 +34,18 @@ namespace Campo_minato3
 
         Color[] ColoriNatale = new Color[]
         {
-            Color.FromArgb(0, 0, 255),       // 1 - Blu
-            Color.FromArgb(0, 128, 0),       // 2 - Verde
-            Color.FromArgb(255, 0, 0),       // 3 - Rosso
-            Color.FromArgb(0, 0, 139),       // 4 - Blu scuro
-            Color.FromArgb(139, 69, 19),     // 5 - Marrone scuro
-            Color.FromArgb(72, 209, 204),    // 6 - Ciano scuro
-            Color.FromArgb(0, 0, 0),         // 7 - Nero
-            Color.FromArgb(105, 105, 105),   // 8 - Grigio scuro
-            Color.FromArgb(255,70,70),       // Cella non scoperta
-            Color.FromArgb(200,255,200),     // Cella scoperta
-            Color.FromArgb(50,50,255),       // Cella perdita
-            Color.FromArgb(0,0,0)            // Colore default
+            ColorTranslator.FromHtml("#0000FF"), // 1 - Blu
+            ColorTranslator.FromHtml("#008000"), // 2 - Verde
+            ColorTranslator.FromHtml("#FF0000"), // 3 - Rosso
+            ColorTranslator.FromHtml("#00008B"), // 4 - Blu scuro
+            ColorTranslator.FromHtml("#8B4513"), // 5 - Marrone scuro
+            ColorTranslator.FromHtml("#48D1CC"), // 6 - Ciano scuro
+            ColorTranslator.FromHtml("#000000"), // 7 - Nero
+            ColorTranslator.FromHtml("#696969"), // 8 - Grigio scuro
+            ColorTranslator.FromHtml("#FF4646"), // Cella non scoperta
+            ColorTranslator.FromHtml("#C8FFC8"), // Cella scoperta
+            ColorTranslator.FromHtml("#3232FF"), // Cella perdita
+            ColorTranslator.FromHtml("#000000")  // Colore default
         };
         Font fontnatale = new Font("Algerian", 14, FontStyle.Bold);
         CTema natale;
@@ -54,19 +54,20 @@ namespace Campo_minato3
 
         Color[] ColoriDefault = new Color[]
         {
-            Color.FromArgb(0, 0, 255),       // 1 - Blu
-            Color.FromArgb(0, 128, 0),       // 2 - Verde
-            Color.FromArgb(255, 0, 0),       // 3 - Rosso
-            Color.FromArgb(0, 0, 139),       // 4 - Blu scuro
-            Color.FromArgb(139, 69, 19),     // 5 - Marrone scuro
-            Color.FromArgb(72, 209, 204),    // 6 - Ciano scuro
-            Color.FromArgb(0, 0, 0),         // 7 - Nero
-            Color.FromArgb(105, 105, 105),   // 8 - Grigio scuro
-            Color.FromArgb(170,170,170),     // Cella non scoperta
-            Color.FromArgb(240,240,240),     // Cella scoperta
-            Color.FromArgb(255,20,40),       // Cella perdita
-            Color.FromArgb(0,0,0)            // Colore default
+            ColorTranslator.FromHtml("#0000FF"), // 1 - Blu
+            ColorTranslator.FromHtml("#008000"), // 2 - Verde
+            ColorTranslator.FromHtml("#FF0000"), // 3 - Rosso
+            ColorTranslator.FromHtml("#00008B"), // 4 - Blu scuro
+            ColorTranslator.FromHtml("#8B4513"), // 5 - Marrone scuro
+            ColorTranslator.FromHtml("#48D1CC"), // 6 - Ciano scuro
+            ColorTranslator.FromHtml("#000000"), // 7 - Nero
+            ColorTranslator.FromHtml("#696969"), // 8 - Grigio scuro
+            ColorTranslator.FromHtml("#AAAAAA"), // Cella non scoperta
+            ColorTranslator.FromHtml("#F0F0F0"), // Cella scoperta
+            ColorTranslator.FromHtml("#FF1428"), // Cella perdita
+            ColorTranslator.FromHtml("#000000")  // Colore default
         };
+
         Font fontdefault = new Font("Arial", 14, FontStyle.Bold);
         CTema Classico;
 
