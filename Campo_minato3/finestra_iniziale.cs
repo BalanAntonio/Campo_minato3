@@ -154,8 +154,16 @@ namespace Campo_minato3
 
         private void btn_inserisci_Click(object sender, EventArgs e)
         {
-            string difficolta = cmb_difficolta.SelectedItem.ToString().ToLower();
-            int nTema = cmb_tema.SelectedIndex;
+            string difficolta;
+            int nTema;
+
+            // controlla che l'utente non abbia scritto nei combo box
+            if (cmb_difficolta.SelectedIndex == -1) { cmb_difficolta.SelectedIndex = 0; }
+            if (cmb_tema.SelectedIndex == -1) { cmb_tema.SelectedIndex = 0; }
+
+            difficolta = cmb_difficolta.SelectedItem.ToString().ToLower();
+            nTema = cmb_tema.SelectedIndex;
+
 
             if (difficolta == "facile")
             {
@@ -177,7 +185,7 @@ namespace Campo_minato3
             }
 
             DialogResult = DialogResult.OK;
-
+            
             tema = temiPrivati[nTema]; // assegna il tema selezionato alla variabile tema
             Close();
         }
