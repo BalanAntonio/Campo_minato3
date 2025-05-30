@@ -55,7 +55,7 @@ namespace Campo_minato3
         {
             InitializeComponent();
 
-            inizio("Benvenuto al prato fiorito", "--");
+            inizio("Benvenuto al campo minato", "--");
         }
 
         public void inizio(string messaggio, string punteggio)
