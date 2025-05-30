@@ -1,3 +1,3 @@
 nome;bomba;bandiera;font;colori;suoni
 Classico;💣;🏴;Arial,14,Bold;#0000FF,#008000,#FF0000,#00008B,#8B4513,#48D1CC,#000000,#696969,#AAAAAA,#F0F0F0,#FF1428,#000000;perso.wav,click_bandiera.wav,click_doppio.wav,click_normale.wav,vittoria.wav
-Natale;🍬;🎄;Algerian,14,Bold;#FF0000,#007F0E,#FFD700,#ADD8E6,#8B4513,#C0C0C0,#FFFFFF,#800000,#FFB6C1,#F0FFF0,#FF4500,#000000;perso.wav,click_bandiera.wav,click_doppio.wav,click_normale.wav,vittoria.wav
+Natale;🍬;🎄;Algerian,14,Bold;#FF0000,#007F0E,#FFD700,#ADD8E6,#8B4513,#C0C0C0,#FFFFFF,#800000,#FFB6C1,#F0FFF0,#FF4500,#000000;perso.wav,click_bandiera.wav,click_doppio.wav,natale_click.wav,vittoria.wav
