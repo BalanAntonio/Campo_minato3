@@ -117,12 +117,12 @@ namespace Campo_minato3
                                 SoundPlayer[] suoni = suonoStringhe.Select(nomeFile =>
                                     new SoundPlayer($"media/{nomeFile}") // path relativo o assoluto a tua scelta
                                 ).ToArray();
-                                //string[] suonoStringhe = campi[5].Split(',');
-                                //SoundPlayer[] suoni = new SoundPlayer[suonoStringhe.Length];
-                                //for (int i = 0; i < suonoStringhe.Length; i++)
-                                //{
-                                //    suoni[i] = prendeSuono(suonoStringhe[i].Trim()); // chiama la funzione prendeSuono per ogni suono
-                                //}
+                                // come fare:
+                                // SoundPlayer[] suoni = new SoundPlayer[suonoStringhe.Length];
+                                // for (int i = 0; i < suonoStringhe.Length; i++)
+                                // {
+                                //     suoni[i] = new SoundPlayer($"media/{suonoStringhe[i]}"); // path relativo o assoluto a tua scelta
+                                // }
 
 
                                 // prende il font
