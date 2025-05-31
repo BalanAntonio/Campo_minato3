@@ -145,6 +145,13 @@ namespace Campo_minato3
 
         public void riordinaGrandezze()
         {
+            // da font alle label
+            lbl_titolo.Font = tema.font;
+            lbl_tempo.Font = tema.font;
+            lbl_nMine.Font = tema.font;
+            lbl_nMineTitolo.Font = tema.font;
+            lbl_tempoTitolo.Font = tema.font;
+
             // ridimensiona la grandezza del datagridview in base alla grandezza delle celle
             dtg_campo.Height = (int)25 * altezzaLato + 2;
             dtg_campo.Width = (int)25 * lughezzaLato + 2;
@@ -155,6 +162,7 @@ namespace Campo_minato3
             // centra il datagridview nella finestra
             dtg_campo.Location = new Point((this.ClientSize.Width - dtg_campo.Width) / 2, (this.ClientSize.Height - dtg_campo.Height) / 2 + 50);
             pnl_titolo.Location = new Point((this.ClientSize.Width - pnl_titolo.Width) / 2, 10); // centra il pannello del titolo nella finestra
+
         }
 
         public bool PrendiDifficolta(string messaggio, string punteggio)
