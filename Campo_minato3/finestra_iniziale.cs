@@ -15,6 +15,7 @@ namespace Campo_minato3
 {
     public partial class finestra_iniziale : Form
     {
+        // Proprietà pubbliche per la lunghezza, altezza e numero di mine
         public int lunghezza_latoIn { get; set; }
         public int altezza_latoIn { get; set; }
         public int NmineIn { get; set; }
@@ -23,33 +24,32 @@ namespace Campo_minato3
         {
             get
             {
-                return migliorPunteggioPrivato;
+                return migliorPunteggioPrivato; // restituisce il miglior punteggio privato
             }
         }
         public CTema tema { get; set; }
         List<CTema> temiPrivati = new List<CTema>();
 
-        public finestra_iniziale(string messaggio, string punteggio)
+        public finestra_iniziale(string messaggio, string punteggio) // Costruttore della finestra iniziale che accetta un messaggio e un punteggio
         {
             InitializeComponent();
 
-            lbl_titolo.Text = messaggio;
+            lbl_titolo.Text = messaggio; // scrive il messaggio nel label titolo
             lbl_titolo.Location = new Point((this.ClientSize.Width - lbl_titolo.Width) / 2, lbl_titolo.Location.Y); // Centra il titolo
 
-            lbl_tempoCorrente.Text = $"{punteggio} s";
+            lbl_tempoCorrente.Text = $"{punteggio} s"; // scrive il punteggio corrente nel label
 
 
-            migliorTempo();
+            migliorTempo(); //scrive il miglior tempo
 
-            leggiTemi();
+            leggiTemi(); // legge i temi dal file CSV
 
             cmb_difficolta.Items.Add("Facile");
             cmb_difficolta.Items.Add("Medio");
             cmb_difficolta.Items.Add("Difficile");
 
+            // Imposta una selezione di default per i combo box
             cmb_difficolta.SelectedIndex = 0;
-
-
             cmb_tema.SelectedIndex = 0;
         }
 
@@ -84,11 +84,11 @@ namespace Campo_minato3
                 {
                     string riga;
 
-                    while (!sr.EndOfStream)
+                    while (!sr.EndOfStream) // finché non si arriva alla fine del file
                     {
                         riga = sr.ReadLine(); // legge la riga
 
-                        if (inizio) // se non è la prima riga
+                        if (inizio) // se è la prima riga
                         {
                             riga = sr.ReadLine(); // legge la riga successiva
                             inizio = false; // non è più la prima riga
@@ -99,10 +99,10 @@ namespace Campo_minato3
                         {
                             string[] campi = riga.Split(';'); // divide la riga in base al carattere ';'
 
-                            if (campi.Length == 6)
+                            if (campi.Length == 6) // se ci sono 6 campi nella riga
                             {
                                 // prende i colori
-                                string[] coloreStringhe = campi[4].Split(',');
+                                string[] coloreStringhe = campi[4].Split(','); // divide i colori in base alla virgola
                                 Color[] colori = coloreStringhe.Select(c => ColorTranslator.FromHtml(c)).ToArray();
                                 // come fare:
                                 // Color[] colori = new Color[coloreStringhe.Length];
@@ -113,7 +113,7 @@ namespace Campo_minato3
 
 
                                 // prende i suoni
-                                string[] suonoStringhe = campi[5].Split(',');
+                                string[] suonoStringhe = campi[5].Split(','); // divide i suoni in base alla virgola
                                 SoundPlayer[] suoni = suonoStringhe.Select(nomeFile =>
                                     new SoundPlayer($"media/{nomeFile}") // path relativo o assoluto a tua scelta
                                 ).ToArray();
@@ -138,6 +138,7 @@ namespace Campo_minato3
 
                                 Font font = new Font(nomeFont, grandezzaFont, stile);
 
+                                // aggiunge il tema alla lista dei temi privati e al combo box
                                 temiPrivati.Add(new CTema(campi[0], font, colori, campi[1], campi[2], suoni));
                                 cmb_tema.Items.Add(campi[0]);
                             }
@@ -155,39 +156,45 @@ namespace Campo_minato3
         private void btn_inserisci_Click(object sender, EventArgs e)
         {
             string difficolta;
+            int difficoltaIn = 0;
             int nTema;
 
-            // controlla che l'utente non abbia scritto nei combo box
+            // controlla che l'utente non abbia scritto un testo nei combo box, se lo ha fatto imposta il valore di default
             if (cmb_difficolta.SelectedIndex == -1) { cmb_difficolta.SelectedIndex = 0; }
             if (cmb_tema.SelectedIndex == -1) { cmb_tema.SelectedIndex = 0; }
 
-            difficolta = cmb_difficolta.SelectedItem.ToString().ToLower();
-            nTema = cmb_tema.SelectedIndex;
 
+            difficoltaIn = cmb_difficolta.SelectedIndex; // prende l'indice della difficoltà selezionata
+            nTema = cmb_tema.SelectedIndex; // prende l'indice del tema selezionato
 
-            if (difficolta == "facile")
+            switch (difficoltaIn) // assegna i valori in base alla difficoltà selezionata
             {
-                lunghezza_latoIn = 9;
-                altezza_latoIn = 9;
-                NmineIn = 10;
-            }
-            else if (difficolta == "medio")
-            {
-                lunghezza_latoIn = 16;
-                altezza_latoIn = 16;
-                NmineIn = 40;
-            }
-            else if (difficolta == "difficile")
-            {
-                lunghezza_latoIn = 30;
-                altezza_latoIn = 16;
-                NmineIn = 99;
+                case 0: // facile
+                    lunghezza_latoIn = 9;
+                    altezza_latoIn = 9;
+                    NmineIn = 10;
+                    break;
+                case 1: // medio
+                    lunghezza_latoIn = 16;
+                    altezza_latoIn = 16;
+                    NmineIn = 40;
+                    break;
+                case 2: // difficile
+                    lunghezza_latoIn = 30;
+                    altezza_latoIn = 16;
+                    NmineIn = 99;
+                    break;
+                default: // se non è selezionata una difficoltà valida o c'è qualche problema, imposta i valori di default
+                    lunghezza_latoIn = 9;
+                    altezza_latoIn = 9;
+                    NmineIn = 10;
+                    break;
             }
 
             DialogResult = DialogResult.OK;
             
             tema = temiPrivati[nTema]; // assegna il tema selezionato alla variabile tema
-            Close();
+            Close(); // chiude la finestra iniziale e restituisce il risultato OK al chiamante
         }
 
         private void btn_resetta_Click(object sender, EventArgs e)

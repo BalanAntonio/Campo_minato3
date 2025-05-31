@@ -10,6 +10,7 @@ namespace Campo_minato3
 {
     public class CTema
     {
+        // Proprietà pubbliche per il nome del tema, il font, i colori, la bomba, la bandiera e i suoni
         public string nomeTema { get; set; }
         public Font font { get; set; }
         public Color[] colori { get; set; }
@@ -17,6 +18,8 @@ namespace Campo_minato3
         public string bandiera { get; set; }
         public SoundPlayer[] Suoni { get; set; }
 
+
+        // Costruttore di default, relativamente inutile dato che i temi sono letti da un file CSV
         /*public CTema()
         {
             nomeTema = "Default";

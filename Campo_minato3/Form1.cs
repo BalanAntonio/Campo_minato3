@@ -60,21 +60,24 @@ namespace Campo_minato3
                 return;
             }
 
-            lbl_tempo.Text = "0 s"; // resetta il tempo
-            secondi = 0; // resetta il tempo
+            // resetta il tempo
+            lbl_tempo.Text = "0 s";
+            secondi = 0;
 
             
-            // inizia a contare il tempocsvssf
+            // inizia a contare il tempo
             cronometro = new Timer();
             cronometro.Interval = 1000; // ogni secondo
             cronometro.Tick += contaTempo;
             cronometro.Start();
 
+            // resetta variabili
             fattoClickIniziale = false;
             partitaPersa = false;
             Nbandiere = 0; // numero di bandiere messe
             BlocchiScoperti = 0;
 
+            // resetta liste e array
             Array.Clear(campo, 0, campo.Length); // imposta tutto a 0
             bandiere.Clear(); // svuota la lista delle bandiere
 
@@ -85,7 +88,7 @@ namespace Campo_minato3
 
         private void contaTempo(object sender, EventArgs e)
         {
-            secondi++;
+            secondi++; // aumenta il conteggio del tempo
 
             //lbl_tempo.Invoke((MethodInvoker)(() => lbl_tempo.Text = $"{secondi} s"));
             lbl_tempo.Text = $"{secondi} s";
@@ -127,6 +130,7 @@ namespace Campo_minato3
                 }
             }
 
+            // rende non visibili prima colonna e la prina riga che sono inutili per il nostro gioco
             dtg_campo.ColumnHeadersVisible = false;
             dtg_campo.RowHeadersVisible = false;
 
@@ -197,7 +201,7 @@ namespace Campo_minato3
             {
                 int x = random.Next(0, lughezzaLato);
                 int y = random.Next(0, altezzaLato);
-                if (campo[x, y] != -1 && controlloClick(x,y)) // se la cella non è già occupata da una mina
+                if (campo[x, y] != -1 && controlloClick(x,y)) // se la cella non è già occupata da una mina e non è il click iniziale
                 {
                     campo[x, y] = -1; // posiziona la mina
                     mine[minePos] = new Cmina(x, y);
@@ -210,6 +214,8 @@ namespace Campo_minato3
             }
         }
 
+
+        // le prossime due funzioni sono sono molto simili, ma abbiamo deciso di tenerle separate per chiarezza
         public bool controlloClick(int xIn, int yIn) 
         {
             // falso = non mettere
@@ -220,12 +226,9 @@ namespace Campo_minato3
                     int Posx = xIn + x;
                     int Posy = yIn + y;
 
-                    if (controlloBordi(Posx, Posy))
+                    if (controlloBordi(Posx, Posy) && campo[Posx, Posy] == 100) // se la cella è il click iniziale
                     {
-                        if (campo[Posx, Posy] == 100)// se la cella non è una mina
-                        {
-                            return false;
-                        }
+                        return false; // se la cella è il click iniziale non mettere la mina
 
                     }
                 }
@@ -296,11 +299,11 @@ namespace Campo_minato3
         {
             if (xIn < 0 || xIn >= lughezzaLato || yIn < 0 || yIn >= altezzaLato)
             {
-                return false; // esci dalla funzione se le coordinate sono fuori dai bordi
+                return false; // esci dalla funzione se le coordinate sono fuori dai bordi e rorna false
             }
             else
             {
-                return true;
+                return true; // le coordinate sono valide, ritorna true
             }
         }
 
@@ -309,10 +312,12 @@ namespace Campo_minato3
             int riga = e.RowIndex;
             int colonna = e.ColumnIndex;
 
+            /*
             if (e.Button == MouseButtons.Middle) { // per debug: fa vedere il contenuto della cella nell'array
                 MessageBox.Show(campo[colonna, riga].ToString());
                 return;
             }
+            */
 
             if (!fattoClickIniziale && e.Button==MouseButtons.Left)
             {
@@ -320,6 +325,10 @@ namespace Campo_minato3
                 posizionaMine();
                 campo[colonna, riga] = 0; // rimetto come cella vuota
                 fattoClickIniziale = true;
+            } else if (!fattoClickIniziale)
+            {
+                MessageBox.Show("Devi prima cliccare con il tasto sinistro su una cella per iniziare la partita!");
+                return;
             }
 
             if (e.Button == MouseButtons.Right)// CLICK DESTRO PER BANDIERE
@@ -327,16 +336,24 @@ namespace Campo_minato3
 
                 if (campo[colonna, riga] == -1) // se c'e la mina dove hai fatto click destro
                 {
-                    souni[1].Play();
+                    souni[1].Play(); // suono bandiera
+
+                    // metti bandiera e cambia il valore della cella, inoltre aumenta / diminuisce il numero di bandiere
                     Nbandiere += ControlloBandiere(riga, colonna, true);
                 }
                 else if ((campo[colonna, riga] >= 0 && campo[colonna, riga] <= 8) || campo[colonna, riga] < -1)
                 {
-                    souni[1].Play();
+                    souni[1].Play(); // suono bandiera
+                    // metti bandiera e cambia il valore della cella, inoltre aumenta / diminuisce il numero di bandiere
                     Nbandiere += ControlloBandiere(riga, colonna, false);
                 }
                 lbl_nMine.Text = $"{Nmine - Nbandiere}"; // aggiorna il numero di mine rimaste
                 //MessageBox.Show("Giuste: " + BandiereGiuste.ToString() + "\nSbagliate: " + BandiereSbagliate.ToString());
+                return;
+            }
+
+            if (e.Button != MouseButtons.Left) // se non è il click sinistro esci dalla funzione
+            {
                 return;
             }
 
@@ -346,23 +363,25 @@ namespace Campo_minato3
             {
                 return;
             }
-            souni[3].Play();
+
+            // arrivati a questo punto significa che si è fatto click sinistro su una cella coperta, quindi si scopre la cella
+            souni[3].Play(); // suono cliccato
             cellaCliccata(colonna, riga);
         }
 
         public int ControlloBandiere(int riga, int colonna, bool bandieraGiusta)
         {
-            if (campo[colonna, riga] >= -1 && campo[colonna, riga] <= 8 && Nbandiere < Nmine) // messa bandiera su mina nascosta
+            if (campo[colonna, riga] >= -1 && campo[colonna, riga] <= 8 && Nbandiere < Nmine) // se non c'è ancora una bandiera e non si è superato il numero di mine
             {
-                dtg_campo.Rows[riga].Cells[colonna].Value = tema.bandiera;
+                dtg_campo.Rows[riga].Cells[colonna].Value = tema.bandiera; // mostra la bandiera
                 campo [colonna, riga] -= 10; // metti bandiera e cambia il valore della cella
                 bandiere.Add(new Cbandiere(colonna, riga, bandieraGiusta)); // aggiungi la bandiera alla lista
                 return 1;
             }
             else if (campo[colonna, riga] < -1) // tolto bandiera su mina nascosta
             {
-                dtg_campo.Rows[riga].Cells[colonna].Value = " ";
-                campo[colonna, riga] += 10; // togli bandiera e cambia il valore della cella
+                dtg_campo.Rows[riga].Cells[colonna].Value = " "; // rimuovi la bandiera dalla cella
+                campo[colonna, riga] += 10; // togli bandiera e cambia il valore della cella che rotorna al valore originale
                 bandiere.RemoveAll(b => b.posX == colonna && b.posY == riga); // rimuovi la bandiera dalla lista
                 return -1;
             }
@@ -372,12 +391,14 @@ namespace Campo_minato3
 
         public void finePartitaPersa()
         {
+            // indica la posizione delle mina
             foreach (var parametro in mine)
             {
                 dtg_campo.Rows[parametro.posY].Cells[parametro.posX].Value = tema.bomba; // mostra la mina
                 dtg_campo.Rows[parametro.posY].Cells[parametro.posX].Style.BackColor = tema.colori[10]; // cambia il colore della cella in rosso
             }
 
+            // indica la posizione delle bandiere sbagliate con una X
             foreach (var parametro in bandiere)
             {
                 if (!parametro.postoGiusto)
@@ -390,11 +411,12 @@ namespace Campo_minato3
                 }
             }
 
-            partitaPersa = true;
-            souni[0].Play();
-            cronometro.Stop();
+            // funzioni vitali per la fine della partita
+            partitaPersa = true; // non permette di scoprire altre celle
+            souni[0].Play(); // suono di fine partita persa
+            cronometro.Stop(); // ferma il cronometro
 
-            // ricomincia da capo
+            // ricomincia da capo richiamando la funzione inizio
             inizio("Hai perso!!!", "--");
         }
         
@@ -425,31 +447,35 @@ namespace Campo_minato3
             return bandiere;
         }
 
+        // se l'utente fa doppio click su una cella scoperta con un numero pari al numero di bandiere adiacenti, si scoprono tutte le celle adiacenti che non sono bandiere
         private void dtg_campo_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             dtg_campo.ClearSelection(); // togli la selezione cosi la cella cliccata non rimane blu
-            int riga = e.RowIndex;
-            int colonna = e.ColumnIndex;
+            int riga = e.RowIndex; // prendi la riga della cella cliccata
+            int colonna = e.ColumnIndex; // prendi la colonna della cella cliccata
 
             //MessageBox.Show(contaBandiereAdiacenti(colonna, riga).ToString() + ", " + (campo[colonna, riga] - 10));
 
-            if (campo[colonna, riga] >= 11 && campo[colonna, riga] <= 18 && contaBandiereAdiacenti(colonna,riga) == campo[colonna, riga] - 10)
+            if (campo[colonna, riga] >= 11 && campo[colonna, riga] <= 18 && contaBandiereAdiacenti(colonna,riga) == campo[colonna, riga] - 10) // se la cella è scoperta e il numero di bandiere adiacenti è uguale al numero della cella
             {
-                souni[2].Play();
+                souni[2].Play(); // suono di doppio cliccato
+
+                // scopri tutte le celle adiacenti che non sono bandiere
                 for (int y = -1; y <= 1; y++)
                 {
                     for (int x = -1; x <= 1; x++)
                     {
                         
-                        if (x != 0 || y != 0)
+                        if (x != 0 || y != 0) // per non controllare la cella stessa
                         {
                             int Posx = colonna + x;
                             int Posy = riga + y;
-                            if (controlloBordi(Posx, Posy))
+
+                            if (controlloBordi(Posx, Posy)) // se le coordinate sono nei bordi del campo
                             {
-                                if(!(campo[Posx, Posy] < -1))
+                                if(!(campo[Posx, Posy] < -1)) // se la cella non è una bandiera
                                 {
-                                    if(cellaCliccata(Posx, Posy))
+                                    if(cellaCliccata(Posx, Posy)) // se la funzione ritorna true vuol dire che la partita è finita
                                     {
                                         return;
                                     }
@@ -465,14 +491,16 @@ namespace Campo_minato3
         public bool cellaCliccata(int Posx, int Posy)
         {
 
-            if (campo[Posx, Posy] <= 8 && campo[Posx, Posy] >= -1 && !partitaPersa)
+            if (campo[Posx, Posy] <= 8 && campo[Posx, Posy] >= -1 && !partitaPersa) // se la cella è coperta e la partita non è persa
             {
 
-                if (campo[Posx, Posy] > 0 && campo[Posx, Posy] < 9)
+                if (campo[Posx, Posy] > 0 && campo[Posx, Posy] < 9) // se la cella è coperta e contiene un numeri, NON una mina
                 {
-                    dtg_campo.Rows[Posy].Cells[Posx].Value = campo[Posx, Posy]; // fa vedere all'utente il valore
+                    dtg_campo.Rows[Posy].Cells[Posx].Value = campo[Posx, Posy]; // fa vedere all'utente il numero
                     dtg_campo.Rows[Posy].Cells[Posx].Style.BackColor = tema.colori[9]; // colore sfondo
-                    dtg_campo.Rows[Posy].Cells[Posx].Style.ForeColor = tema.colori[campo[Posx, Posy]];
+                    dtg_campo.Rows[Posy].Cells[Posx].Style.ForeColor = tema.colori[campo[Posx, Posy]]; // colore numero
+
+                    // applica la funzione flood fill per scoprire le celle vuote adiacenti, però in queste cirsostanze verrà scoperta solo la cella cliccata
                     IndicaCelleVuote(Posx, Posy);
                 }
                 else if (campo[Posx, Posy] == -1)
@@ -488,12 +516,12 @@ namespace Campo_minato3
 
             }
             
-            if (BlocchiScoperti == lughezzaLato * altezzaLato - Nmine)
+            if (BlocchiScoperti == lughezzaLato * altezzaLato - Nmine) // se sono state scoperte tutte le celle tranne le mine
             {
-                cronometro.Stop();
-                souni[4].Play();
+                cronometro.Stop(); // ferma il cronometro
+                souni[4].Play(); // suono di vittoria
 
-                migliorPunteggio();
+                migliorPunteggio(); // controlla se il punteggio è migliore del precedente
 
                 inizio("Hai vinto!!!", $"{secondi}");
                 return true;
@@ -505,7 +533,7 @@ namespace Campo_minato3
 
         public void migliorPunteggio()
         {
-            if (migliorTempo > secondi)
+            if (migliorTempo > secondi) // se il tempo attuale è migliore del miglior tempo
             {
                 try // permette di far andare avanti il programma anche se si trova un errore
                 {
@@ -514,7 +542,7 @@ namespace Campo_minato3
                         sw.WriteLine($"{secondi}"); // sovrascrive il punteggio
                     }
                 }
-                catch
+                catch // se c'è un errore durante la scrittura del file
                 {
                     MessageBox.Show("errore");
                 }
