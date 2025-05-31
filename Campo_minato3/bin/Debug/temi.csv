@@ -1,5 +1,5 @@
 nome;bomba;bandiera;font;colori;suoni
 Classico;💣;🏴;Arial,14,Bold;#0000FF,#008000,#FF0000,#00008B,#8B4513,#48D1CC,#000000,#696969,#AAAAAA,#F0F0F0,#FF1428,#000000;perso.wav,click_bandiera.wav,click_doppio.wav,click_normale.wav,vittoria.wav
-Natale;🍬;🎄;Algerian,11,Bold;#FF0000,#007F0E,#FFD700,#ADD8E6,#8B4513,#C0C0C0,#FFFFFF,#800000,#FFB6C1,#F0FFF0,#FF4500,#000000;natale_perso.wav,natale_click.wav,natale_click.wav,natale_click.wav,natale_vittoria.wav
-Fiaba;✸;⚑;Papyrus,14,Bold;#6A5ACD,#228B22,#DC143C,#2F4F4F,#8B4513,#00CED1,#191970,#B0C4DE,#E6E6FA,#F5FFFA,#FF69B4,#000000;fiaba_perso.wav,fiaba_bandiera.wav,fiaba_doppio.wav,fiaba_click.wav,fiaba_vittoria.wav
-Cars;🏎️;🏁;Algerian,14,Bold;#FF0000,#FFD700,#000000,#1E90FF,#8B4513,#808080,#2F4F4F,#FFFFFF,#DC143C,#FFE4B5,#FF4500,#000000;perso.wav,click_bandiera.wav,click_doppio.wav,click_normale.wav,vittoria.wav
+Natale;🍬;🎄;Tekton Pro,14,Bold;#FF0000,#007F0E,#FFD700,#ADD8E6,#8B4513,#C0C0C0,#FFFFFF,#800000,#FFB6C1,#F0FFF0,#FF4500,#000000;natale_perso.wav,natale_click.wav,natale_click.wav,natale_click.wav,natale_vittoria.wav
+Fiaba;✸;⚑;Ink Free,14,Bold;#6A5ACD,#228B22,#DC143C,#2F4F4F,#8B4513,#00CED1,#191970,#B0C4DE,#E6E6FA,#F5FFFA,#FF69B4,#000000;fiaba_perso.wav,fiaba_bandiera.wav,fiaba_doppio.wav,fiaba_click.wav,fiaba_vittoria.wav
+Cars;🏎️;🏁;Hobo Std,14,Bold;#FF0000,#FFD700,#000000,#1E90FF,#8B4513,#808080,#2F4F4F,#FFFFFF,#DC143C,#FFE4B5,#FF4500,#000000;cars_perso.wav,cars_bandiera.wav,cars_doppio.wav,cars_click.wav,cars_vittoria.wav
