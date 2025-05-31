@@ -12,7 +12,7 @@ namespace Campo_minato3
         
         public bool chiudiForm { get; private set; } = false; // per chiudere la funestra iniziale se l'utente non seleziona una difficoltà
 
-        System.Windows.Forms.Timer cronometro;
+        Timer cronometro;
         int secondi = 0;
         int migliorTempo; // per il miglior tempo, viene letto dal file PunteggioMax.csv
 
@@ -63,8 +63,9 @@ namespace Campo_minato3
             lbl_tempo.Text = "0 s"; // resetta il tempo
             secondi = 0; // resetta il tempo
 
-            // inizia a contare il tempo
-            cronometro = new System.Windows.Forms.Timer();
+            //asd
+            // inizia a contare il tempocsvssf
+            cronometro = new Timer();
             cronometro.Interval = 1000; // ogni secondo
             cronometro.Tick += contaTempo;
             cronometro.Start();
