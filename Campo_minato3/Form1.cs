@@ -60,6 +60,7 @@ namespace Campo_minato3
                 return;
             }
 
+            // ferma ogni suno in riproduzione
             foreach (SoundPlayer suono in souni)
             {
                 suono.Stop();
