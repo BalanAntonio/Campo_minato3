@@ -57,7 +57,7 @@
             // 
             this.lbl_titoloDifficolta.AutoSize = true;
             this.lbl_titoloDifficolta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_titoloDifficolta.Location = new System.Drawing.Point(43, 83);
+            this.lbl_titoloDifficolta.Location = new System.Drawing.Point(37, 112);
             this.lbl_titoloDifficolta.Name = "lbl_titoloDifficolta";
             this.lbl_titoloDifficolta.Size = new System.Drawing.Size(158, 20);
             this.lbl_titoloDifficolta.TabIndex = 1;
@@ -67,7 +67,7 @@
             // cmb_difficolta
             // 
             this.cmb_difficolta.FormattingEnabled = true;
-            this.cmb_difficolta.Location = new System.Drawing.Point(80, 106);
+            this.cmb_difficolta.Location = new System.Drawing.Point(74, 135);
             this.cmb_difficolta.Name = "cmb_difficolta";
             this.cmb_difficolta.Size = new System.Drawing.Size(121, 21);
             this.cmb_difficolta.TabIndex = 2;
@@ -75,18 +75,19 @@
             // 
             // btn_inserisci
             // 
-            this.btn_inserisci.Location = new System.Drawing.Point(283, 131);
+            this.btn_inserisci.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_inserisci.Location = new System.Drawing.Point(251, 135);
             this.btn_inserisci.Name = "btn_inserisci";
-            this.btn_inserisci.Size = new System.Drawing.Size(75, 23);
+            this.btn_inserisci.Size = new System.Drawing.Size(75, 29);
             this.btn_inserisci.TabIndex = 3;
-            this.btn_inserisci.Text = "inserisci";
+            this.btn_inserisci.Text = "gioca";
             this.btn_inserisci.UseVisualStyleBackColor = true;
             this.btn_inserisci.Click += new System.EventHandler(this.btn_inserisci_Click);
             // 
             // cmb_tema
             // 
             this.cmb_tema.FormattingEnabled = true;
-            this.cmb_tema.Location = new System.Drawing.Point(80, 175);
+            this.cmb_tema.Location = new System.Drawing.Point(74, 204);
             this.cmb_tema.Name = "cmb_tema";
             this.cmb_tema.Size = new System.Drawing.Size(121, 21);
             this.cmb_tema.TabIndex = 4;
@@ -96,7 +97,7 @@
             // 
             this.lbl_temaTitolo.AutoSize = true;
             this.lbl_temaTitolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_temaTitolo.Location = new System.Drawing.Point(72, 152);
+            this.lbl_temaTitolo.Location = new System.Drawing.Point(66, 181);
             this.lbl_temaTitolo.Name = "lbl_temaTitolo";
             this.lbl_temaTitolo.Size = new System.Drawing.Size(129, 20);
             this.lbl_temaTitolo.TabIndex = 5;
@@ -149,7 +150,7 @@
             // 
             // btn_resetta
             // 
-            this.btn_resetta.Location = new System.Drawing.Point(261, 175);
+            this.btn_resetta.Location = new System.Drawing.Point(251, 202);
             this.btn_resetta.Name = "btn_resetta";
             this.btn_resetta.Size = new System.Drawing.Size(97, 23);
             this.btn_resetta.TabIndex = 10;
