@@ -17,7 +17,7 @@ namespace Campo_minato3
         public string bandiera { get; set; }
         public SoundPlayer[] Suoni { get; set; }
 
-        public CTema()
+        /*public CTema()
         {
             nomeTema = "Default";
             font = new Font(FontFamily.GenericSansSerif, 14.25f, FontStyle.Regular);
@@ -40,7 +40,7 @@ namespace Campo_minato3
 
             bomba = "💣";
             bandiera = "🚩";
-        }
+        }*/
 
         public CTema( string nomeTema, Font font, Color[] colori, string bomba, string bandiera, SoundPlayer[] suoni)
         {
