@@ -63,7 +63,7 @@ namespace Campo_minato3
             lbl_tempo.Text = "0 s"; // resetta il tempo
             secondi = 0; // resetta il tempo
 
-            //asd
+            
             // inizia a contare il tempocsvssf
             cronometro = new Timer();
             cronometro.Interval = 1000; // ogni secondo
