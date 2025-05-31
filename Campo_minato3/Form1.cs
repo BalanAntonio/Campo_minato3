@@ -64,7 +64,7 @@ namespace Campo_minato3
             secondi = 0; // resetta il tempo
 
             // inizia a contare il tempo
-            cronometro = new System.Windows.Forms.Timer();
+            cronometro = new Timer();
             cronometro.Interval = 1000; // ogni secondo
             cronometro.Tick += contaTempo;
             cronometro.Start();
