@@ -60,6 +60,11 @@ namespace Campo_minato3
                 return;
             }
 
+            foreach (SoundPlayer suono in souni)
+            {
+                suono.Stop();
+            }
+
             // resetta il tempo
             lbl_tempo.Text = "0 s";
             secondi = 0;
