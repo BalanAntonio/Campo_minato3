@@ -176,7 +176,7 @@
             this.Controls.Add(this.lbl_titolo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "finestra_iniziale";
-            this.Text = "finestra_iniziale";
+            this.Text = "Campo minato";
             this.Load += new System.EventHandler(this.finestra_iniziale_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
