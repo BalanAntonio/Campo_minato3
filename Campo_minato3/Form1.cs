@@ -12,7 +12,7 @@ namespace Campo_minato3
         
         public bool chiudiForm { get; private set; } = false; // per chiudere la funestra iniziale se l'utente non seleziona una difficoltà
 
-        System.Windows.Forms.Timer cronometro;
+        Timer cronometro;
         int secondi = 0;
         int migliorTempo; // per il miglior tempo, viene letto dal file PunteggioMax.csv
 
