@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Media;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
@@ -58,7 +51,7 @@ namespace Campo_minato3
             inizio("Benvenuto al campo minato", "--");
         }
 
-        public void inizio(string messaggio, string punteggio)
+        private void inizio(string messaggio, string punteggio)
         {
             if (PrendiDifficolta(messaggio, punteggio))
             {
@@ -89,7 +82,7 @@ namespace Campo_minato3
             riordinaGrandezze();
         }
 
-        public void contaTempo(object sender, EventArgs e)
+        private void contaTempo(object sender, EventArgs e)
         {
             secondi++;
 
